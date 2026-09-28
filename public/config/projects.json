@@ -44,6 +44,46 @@
     },
     {
       "id": 2,
+      "title": "E-commerce Medallion Lakehouse",
+      "category": "Data Engineering",
+      "featured": true,
+      "summary": "Incremental, governed Databricks lakehouse over Olist e-commerce data — Auto Loader ingestion, declarative Bronze/Silver/Gold pipelines with data-quality expectations, SCD Type 2 dimensions and asset-bundle deployment.",
+      "description": "An end-to-end lakehouse that turns raw Olist CSV exports into governed analytical tables. Auto Loader lands nine source files into Bronze with a rescued-data column so no field is silently dropped; Silver types, deduplicates and validates each source, routing failing rows to per-table quarantine rather than discarding them; Gold publishes conformed facts and dimensions, including an SCD Type 2 customer dimension built from a change feed. The whole project is version-controlled, unit-tested and deployed as a Databricks Asset Bundle.",
+      "architecture": "Olist CSV batches ➔ Auto Loader with rescued-data capture (Bronze) ➔ typed, deduplicated and rule-validated tables with quarantine (Silver) ➔ SCD2 dimensions, fact tables and daily/monthly aggregates (Gold) ➔ Unity Catalog governance ➔ optional publish to Azure SQL",
+      "metrics": [
+        "9 source datasets ingested incrementally",
+        "8 Gold facts, dimensions and aggregates",
+        "Per-source quarantine tables for failed rows",
+        "File-arrival triggered job with retries and failure alerts"
+      ],
+      "highlights": [
+        "Auto Loader ingestion with an explicit all-string Bronze schema and rescuedDataColumn, so a new or empty landing folder never breaks the run",
+        "Declarative Delta Live Tables pipelines with data-quality rules; rows failing a rule land in a per-source quarantine table with the reasons attached",
+        "SCD Type 2 dim_customer built with an auto CDC flow, alongside dim_product, dim_seller, dim_date, fact_order_item and fact_payment",
+        "Pure transformation functions unit-tested with pytest, kept separate from pipeline wiring so the logic runs locally",
+        "Governance as code: Unity Catalog grants, table and column comments and tags checked into sql/",
+        "Deployed as a Databricks Asset Bundle with a file-arrival triggered daily job, retries and email alerting"
+      ],
+      "techStack": [
+        "Databricks",
+        "Delta Live Tables",
+        "PySpark",
+        "Delta Lake",
+        "Auto Loader",
+        "Unity Catalog",
+        "Python",
+        "SQL",
+        "Asset Bundles",
+        "pytest",
+        "Azure SQL"
+      ],
+      "image": "assets/projects/ecommerce-lakehouse.svg",
+      "githubRepo": "VP171097/databricks-ecommerce-lakehouse",
+      "githubUrl": "https://github.com/VP171097/databricks-ecommerce-lakehouse",
+      "liveUrl": ""
+    },
+    {
+      "id": 3,
       "title": "GitHub Developer Suite & Privacy Manager",
       "category": "Full Stack / Tools",
       "featured": true,
@@ -74,7 +114,7 @@
       "liveUrl": ""
     },
     {
-      "id": 3,
+      "id": 4,
       "title": "RentSlate: Tenant & Rent Management Platform",
       "category": "Full Stack / Tools",
       "featured": true,
@@ -108,7 +148,7 @@
       "liveUrl": "https://vp171097.github.io/TenantRentManager/"
     },
     {
-      "id": 4,
+      "id": 5,
       "title": "Modern Interactive Portfolio Platform",
       "category": "Full Stack / Tools",
       "featured": false,

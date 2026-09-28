@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%" role="img" aria-label="Medallion lakehouse: landing to bronze, silver, gold">
+  <defs>
+    <linearGradient id="lhBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070c" />
+      <stop offset="55%" stop-color="#0a1522" />
+      <stop offset="100%" stop-color="#071019" />
+    </linearGradient>
+    <linearGradient id="lhFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.15" />
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0.15" />
+    </linearGradient>
+    <radialGradient id="lhGlow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="lhGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#38bdf8" stroke-opacity="0.07" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#lhBg)" />
+  <rect width="800" height="450" fill="url(#lhGrid)" />
+  <rect width="800" height="450" fill="url(#lhGlow)" />
+
+  <!-- flow spine -->
+  <line x1="96" y1="225" x2="704" y2="225" stroke="url(#lhFlow)" stroke-width="2" />
+
+  <!-- medallion stages -->
+  <g font-family="Inter, Segoe UI, sans-serif" text-anchor="middle">
+    <g>
+      <circle cx="120" cy="225" r="30" fill="#0b1a2b" stroke="#38bdf8" stroke-opacity="0.5" stroke-width="1.5" />
+      <text x="120" y="230" font-size="11" fill="#7dd3fc" font-weight="600">CSV</text>
+      <text x="120" y="288" font-size="11" fill="#64748b">Landing</text>
+    </g>
+    <g>
+      <circle cx="313" cy="225" r="34" fill="#0b1a2b" stroke="#cd7f32" stroke-opacity="0.75" stroke-width="2" />
+      <text x="313" y="230" font-size="12" fill="#e2b07a" font-weight="700">B</text>
+      <text x="313" y="292" font-size="11" fill="#94a3b8">Bronze</text>
+      <text x="313" y="307" font-size="9" fill="#64748b">Auto Loader</text>
+    </g>
+    <g>
+      <circle cx="506" cy="225" r="34" fill="#0b1a2b" stroke="#cbd5e1" stroke-opacity="0.75" stroke-width="2" />
+      <text x="506" y="230" font-size="12" fill="#e2e8f0" font-weight="700">S</text>
+      <text x="506" y="292" font-size="11" fill="#94a3b8">Silver</text>
+      <text x="506" y="307" font-size="9" fill="#64748b">Quarantine</text>
+    </g>
+    <g>
+      <circle cx="680" cy="225" r="34" fill="#0b1a2b" stroke="#fbbf24" stroke-opacity="0.8" stroke-width="2" />
+      <text x="680" y="230" font-size="12" fill="#fcd34d" font-weight="700">G</text>
+      <text x="680" y="292" font-size="11" fill="#94a3b8">Gold</text>
+      <text x="680" y="307" font-size="9" fill="#64748b">Facts + Dims</text>
+    </g>
+  </g>
+
+  <!-- travelling particles -->
+  <g fill="#7dd3fc">
+    <circle r="3.5" cx="0" cy="225">
+      <animateMotion dur="5s" repeatCount="indefinite" path="M96,0 L704,0" />
+    </circle>
+    <circle r="2.5" cx="0" cy="225" opacity="0.6">
+      <animateMotion dur="5s" begin="1.6s" repeatCount="indefinite" path="M96,0 L704,0" />
+    </circle>
+    <circle r="2.5" cx="0" cy="225" opacity="0.6">
+      <animateMotion dur="5s" begin="3.2s" repeatCount="indefinite" path="M96,0 L704,0" />
+    </circle>
+  </g>
+
+  <g font-family="Inter, Segoe UI, sans-serif">
+    <text x="60" y="72" font-size="21" fill="#f1f5f9" font-weight="700">E-commerce Lakehouse</text>
+    <text x="60" y="97" font-size="12.5" fill="#7dd3fc">Databricks · Delta Live Tables · Unity Catalog</text>
+    <text x="60" y="392" font-size="10.5" fill="#64748b">Olist order data · SCD2 dimensions · data-quality expectations · asset bundle deployment</text>
+  </g>
+</svg>
