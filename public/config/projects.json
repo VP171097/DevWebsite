@@ -4,8 +4,7 @@
   "categories": [
     "All",
     "Data Engineering",
-    "Full Stack / Tools",
-    "AI & Computer Vision"
+    "Full Stack / Tools"
   ],
   "projects": [
     {
@@ -76,34 +75,37 @@
     },
     {
       "id": 3,
-      "title": "AI Smart Attendance Management System",
-      "category": "AI & Computer Vision",
+      "title": "RentSlate: Tenant & Rent Management Platform",
+      "category": "Full Stack / Tools",
       "featured": true,
-      "summary": "Computer vision-powered desktop application automating institutional attendance via real-time facial recognition and role-based access control.",
-      "description": "Robust OpenCV and deep learning-based desktop application designed for educational and enterprise environments with multi-camera stream support, anti-spoofing checks, and automated reporting.",
-      "architecture": "Live Video Feed ➔ OpenCV Face Detection ➔ Face Embedding Matcher ➔ SQLite Audit Ledger ➔ Role-Based GUI",
+      "summary": "Mobile-first web app for landlords to manage properties, rooms, tenants, monthly rent & electricity billing, payments, ledgers, and PDF receipts — built to be simple enough for non-technical users.",
+      "description": "Production-ready multi-role rental management platform (Owner, Manager, Tenant portal) backed by Supabase Postgres with full Row Level Security. A pure, unit-tested billing engine mirrors server-side Postgres functions so balances, credits, and carry-forwards stay consistent client- and server-side.",
+      "architecture": "React 19 + TypeScript SPA ➔ TanStack Query ➔ Supabase (Postgres + Auth + Storage, RLS) ➔ Postgres Billing Functions & Triggers ➔ Edge Functions (WhatsApp / Email Bills) ➔ GitHub Pages CI/CD",
       "metrics": [
-        ">98.5% Recognition Accuracy",
-        "<50ms Recognition Latency",
-        "3 Attendance Workflows"
+        "3 Roles: Owner, Manager & Tenant Portal",
+        "Idempotent Monthly Bill Generation",
+        "Row Level Security on Every Table"
       ],
       "highlights": [
-        "Automated multi-face detection and continuous recognition with confidence scoring and unknown-face logging",
-        "Three complementary attendance workflows: live camera recognition, teacher 1-click marking, and student self-marking",
-        "Built-in timetable scheduling, leave management workflow, attendance locking, and role-based access control"
+        "Monthly billing engine combining rent, metered electricity, late fees and automatic debt/credit carry-forward",
+        "Dated rent revisions, room transfers and move-out settlements without ever overwriting historical bills",
+        "PDF receipts, UPI QR payments, WhatsApp/email bill delivery, ledgers, reports and CSV export",
+        "Installable PWA with dark mode and large touch targets designed for elderly, non-technical landlords"
       ],
       "techStack": [
-        "Python",
-        "OpenCV",
-        "Face Recognition",
-        "Computer Vision",
-        "SQLite",
-        "Desktop App"
+        "React 19",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "TailwindCSS",
+        "TanStack Query",
+        "Vitest",
+        "GitHub Actions"
       ],
-      "image": "assets/projects/smart-attendance.svg",
-      "githubRepo": "VP171097/SmartAttendanceSystem",
-      "githubUrl": "https://github.com/VP171097/SmartAttendanceSystem",
-      "liveUrl": ""
+      "image": "assets/projects/rentslate.svg",
+      "githubRepo": "VP171097/TenantRentManager",
+      "githubUrl": "https://github.com/VP171097/TenantRentManager",
+      "liveUrl": "https://vp171097.github.io/TenantRentManager/"
     },
     {
       "id": 4,

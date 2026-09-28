@@ -5,6 +5,8 @@ import { useConfig } from "@/context/ConfigContext";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Cpu, Search, Sparkles, Star, Zap, CheckCircle2, Layers } from "lucide-react";
 
+const INITIAL_VISIBLE = 12;
+
 const SkillItemCard = ({ skill }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -86,7 +88,7 @@ const SkillItemCard = ({ skill }) => {
 
       {/* Floating Detailed Hover Tooltip */}
       {showTooltip && skill.useCase && (
-        <div className="absolute left-1/2 -bottom-2 translate-y-full -translate-x-1/2 w-64 p-3 bg-neutral-950/98 backdrop-blur-xl border border-sky-400/50 rounded-xl shadow-2xl z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-150">
+        <div className="absolute left-1/2 -bottom-2 translate-y-full -translate-x-1/2 w-56 max-w-[80vw] p-3 bg-neutral-950/98 backdrop-blur-xl border border-sky-400/50 rounded-xl shadow-2xl z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-150">
           <div className="flex items-center gap-1.5 text-xs font-bold text-sky-300 mb-1 border-b border-neutral-800 pb-1">
             <Zap size={13} className="text-sky-400" />
             <span>{skill.name} • {skill.experience || "Production"}</span>
@@ -106,6 +108,7 @@ const SkillsSection = () => {
 
   const [activeTab, setActiveTab] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   const categories = useMemo(() => {
     if (!skillsConfig?.categories) return ["All"];
@@ -121,12 +124,15 @@ const SkillsSection = () => {
     return allSkills.filter((skill) => {
       const matchesCategory =
         activeTab === "All" || skill.category === activeTab;
+
       const matchesSearch =
         skill.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         skill.useCase?.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
   }, [allSkills, activeTab, searchQuery]);
+
+  const isCollapsible = filteredSkills.length > INITIAL_VISIBLE;
 
   if (loading || !skillsConfig) {
     return <div className="text-white text-center py-6">Loading Skills...</div>;
@@ -197,13 +203,30 @@ const SkillsSection = () => {
 
         {/* Skills Grid with Animated Cards */}
         {filteredSkills.length > 0 ? (
-          <RevealGroup className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3.5">
-            {filteredSkills.map((skill, idx) => (
-              <RevealItem key={idx}>
-                <SkillItemCard skill={skill} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <>
+            <RevealGroup className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3.5">
+              {(isCollapsible && !showAll
+                ? filteredSkills.slice(0, INITIAL_VISIBLE)
+                : filteredSkills
+              ).map((skill, idx) => (
+                <RevealItem key={idx}>
+                  <SkillItemCard skill={skill} />
+                </RevealItem>
+              ))}
+            </RevealGroup>
+
+            {isCollapsible && (
+              <div className="flex justify-center mt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowAll((v) => !v)}
+                  className="btn-cine px-4 py-1.5 rounded-lg text-xs font-semibold glass text-neutral-300 hover:text-sky-300 cursor-pointer"
+                >
+                  {showAll ? "Show less" : `Show all ${filteredSkills.length} skills`}
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="text-center py-12 text-neutral-400 text-sm">
             No matching skills found for "{searchQuery}".
