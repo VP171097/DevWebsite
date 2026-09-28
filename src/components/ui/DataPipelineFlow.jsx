@@ -122,12 +122,12 @@ const DataPipelineFlow = ({ className = "" }) => {
       >
         <defs>
           <linearGradient id="pipeLine" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="rgba(56,189,248,0.05)" />
-            <stop offset="50%" stopColor="rgba(56,189,248,0.45)" />
-            <stop offset="100%" stopColor="rgba(56,189,248,0.05)" />
+            <stop offset="0%" stopColor="rgba(56,189,248,0.12)" />
+            <stop offset="50%" stopColor="rgba(56,189,248,0.95)" />
+            <stop offset="100%" stopColor="rgba(56,189,248,0.12)" />
           </linearGradient>
           <radialGradient id="nodeGlow">
-            <stop offset="0%" stopColor="rgba(56,189,248,0.35)" />
+            <stop offset="0%" stopColor="rgba(56,189,248,0.55)" />
             <stop offset="100%" stopColor="rgba(56,189,248,0)" />
           </radialGradient>
           <radialGradient id="packetGlow">
@@ -144,7 +144,7 @@ const DataPipelineFlow = ({ className = "" }) => {
             key={i}
             d={d}
             stroke="url(#pipeLine)"
-            strokeWidth="1.6"
+            strokeWidth="2.4"
             strokeDasharray="5 7"
             fill="none"
           />
@@ -202,10 +202,10 @@ const DataPipelineFlow = ({ className = "" }) => {
               <circle
                 cx={n.x}
                 cy={n.y}
-                r="4.5"
+                r="5.5"
                 fill="#38bdf8"
                 style={{
-                  opacity: active ? 0 : 0.85,
+                  opacity: active ? 0 : 1,
                   transition: "opacity 320ms ease",
                 }}
               />
@@ -215,7 +215,7 @@ const DataPipelineFlow = ({ className = "" }) => {
                 cy={n.y}
                 r="17"
                 fill="none"
-                stroke="rgba(56,189,248,0.55)"
+                stroke="rgba(56,189,248,0.8)"
                 strokeWidth="1"
                 style={{
                   opacity: active ? 1 : 0,
@@ -227,9 +227,9 @@ const DataPipelineFlow = ({ className = "" }) => {
                 x={n.x}
                 y={n.y + 42}
                 textAnchor="middle"
-                fontSize="11"
+                fontSize="13"
                 letterSpacing="1.6"
-                fill={active ? "rgba(186,230,253,0.95)" : "rgba(148,163,184,0.65)"}
+                fill={active ? "rgba(224,242,254,1)" : "rgba(148,163,184,0.95)"}
                 style={{ transition: "fill 400ms ease" }}
               >
                 {n.label.toUpperCase()}

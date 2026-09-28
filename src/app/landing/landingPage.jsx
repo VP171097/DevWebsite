@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import DataPipelineFlow from "@/components/ui/DataPipelineFlow";
+import { Ripple } from "@/components/magicui/ripple";
 import { AuroraText } from "@/components/magicui/aurora-text";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 import { Particles } from "@/components/magicui/particles";
@@ -178,7 +179,11 @@ const LandingPage = () => {
       {/* Animated data pipeline: Sources -> Ingestion -> Data Lake ->
           Databricks -> Delta Lake -> Analytics */}
       {/* Data pipeline band — in normal flow, below the hero content */}
-      <div className="z-10 w-full max-w-5xl mx-auto mt-8 sm:mt-10 h-[78px] sm:h-[104px] lg:h-[124px] opacity-80">
+      {/* Pulsing ripple circles, behind everything */}
+      <Ripple />
+
+      {/* Data pipeline band — in normal flow, below the hero content */}
+      <div className="z-10 w-full max-w-5xl mx-auto mt-8 sm:mt-10 h-[96px] sm:h-[118px] lg:h-[136px]">
         <DataPipelineFlow className="h-full w-full" />
       </div>
     </div>
