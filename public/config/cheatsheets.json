@@ -20,7 +20,7 @@
           ],
           "difficulty": "Advanced",
           "pdfFile": "assets/DE notes/PySpark_Optimization_Guide.pdf",
-          "fileSize": "2.4 MB"
+          "fileSize": "26 KB"
         }
       ]
     },
@@ -42,7 +42,7 @@
           ],
           "difficulty": "Advanced",
           "pdfFile": "assets/DE notes/Delta_Lake_Medallion_Architecture.pdf",
-          "fileSize": "3.1 MB"
+          "fileSize": "24 KB"
         }
       ]
     },
@@ -64,7 +64,7 @@
           ],
           "difficulty": "Intermediate",
           "pdfFile": "assets/DE notes/Databricks_Unity_Catalog_Governance.pdf",
-          "fileSize": "1.8 MB"
+          "fileSize": "21 KB"
         }
       ]
     },
@@ -85,7 +85,7 @@
           ],
           "difficulty": "Advanced",
           "pdfFile": "assets/DE notes/Advanced_SQL_for_Data_Engineers.pdf",
-          "fileSize": "2.0 MB"
+          "fileSize": "23 KB"
         }
       ]
     },
@@ -106,7 +106,7 @@
           ],
           "difficulty": "Expert",
           "pdfFile": "assets/DE notes/Real_Time_Streaming_Kafka_Spark.pdf",
-          "fileSize": "2.7 MB"
+          "fileSize": "25 KB"
         }
       ]
     },
@@ -128,7 +128,7 @@
           ],
           "difficulty": "Advanced",
           "pdfFile": "assets/DE notes/Project_1_Ecommerce_Lakehouse.pdf",
-          "fileSize": "164 KB"
+          "fileSize": "165 KB"
         },
         {
           "id": "project-performance-cost",
@@ -143,7 +143,7 @@
           ],
           "difficulty": "Advanced",
           "pdfFile": "assets/DE notes/Project_2_Performance_Cost_Case_Study.pdf",
-          "fileSize": "137 KB"
+          "fileSize": "138 KB"
         },
         {
           "id": "project-postgres-cdc-cicd",
@@ -158,7 +158,7 @@
           ],
           "difficulty": "Advanced",
           "pdfFile": "assets/DE notes/Project_3_Postgres_CDC_CICD.pdf",
-          "fileSize": "144 KB"
+          "fileSize": "145 KB"
         },
         {
           "id": "project-azure-end-to-end",
@@ -173,7 +173,58 @@
           ],
           "difficulty": "Advanced",
           "pdfFile": "assets/DE notes/Project_4_Azure_End_To_End_Platform.pdf",
-          "fileSize": "130 KB"
+          "fileSize": "131 KB"
+        }
+      ]
+    },
+    {
+      "id": "interviewprep",
+      "title": "Interview Preparation",
+      "icon": "BookOpen",
+      "topics": [
+        {
+          "id": "interview-question-bank",
+          "topic": "Data Engineer Interview Question Bank",
+          "description": "A structured bank of data engineering interview questions across 22 sections — Spark architecture and internals, PySpark, Delta Lake, streaming, Unity Catalog, cloud platforms and orchestration.",
+          "tags": [
+            "Interview",
+            "Spark",
+            "Delta Lake",
+            "Unity Catalog",
+            "Streaming"
+          ],
+          "difficulty": "Advanced",
+          "pdfFile": "assets/DE notes/Databricks_DE_Interview_Question_Bank.pdf",
+          "fileSize": "2.1 MB"
+        },
+        {
+          "id": "de-concepts-handbook",
+          "topic": "Data Engineering Concepts Handbook",
+          "description": "Topic-by-topic reference across Databricks, Apache Spark, Delta Lake and Unity Catalog: what each component is, why it exists, how it works, and the details that matter in production.",
+          "tags": [
+            "Concepts",
+            "Databricks",
+            "Spark",
+            "Delta Lake",
+            "Reference"
+          ],
+          "difficulty": "Intermediate",
+          "pdfFile": "assets/DE notes/Databricks_DE_Concepts_Handbook.pdf",
+          "fileSize": "2.3 MB"
+        },
+        {
+          "id": "sql-pyspark-handson",
+          "topic": "SQL & PySpark Hands-On",
+          "description": "55 practice questions presented three ways — the logic to reason through, the SQL solution, and the equivalent PySpark side by side.",
+          "tags": [
+            "SQL",
+            "PySpark",
+            "Practice",
+            "Interview"
+          ],
+          "difficulty": "Advanced",
+          "pdfFile": "assets/DE notes/Databricks_SQL_PySpark_Handson.pdf",
+          "fileSize": "3.9 MB"
         }
       ]
     }
