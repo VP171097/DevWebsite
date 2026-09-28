@@ -82,7 +82,7 @@
       "proficiency": 80,
       "experience": "6+ Years",
       "useCase": "Change Data Feed (CDF), schema evolution, partitioning, Z-Ordering, and compaction optimization.",
-      "icon": "/assets/skills/databricks_lakehouse.png"
+      "icon": "/assets/skills/delta-lake.svg"
     },
     {
       "name": "Unity Catalog",
@@ -109,7 +109,7 @@
       "proficiency": 95,
       "experience": "6+ Years",
       "useCase": "Incremental row-level CDC processing, version watermarking, and downstream lakehouse sync.",
-      "icon": "/assets/skills/databricks_lakehouse.png"
+      "icon": "/assets/skills/delta-lake.svg"
     },
     {
       "name": "Python",
