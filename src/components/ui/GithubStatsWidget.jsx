@@ -24,10 +24,10 @@ const GithubStatsWidget = ({ username = "VP171097" }) => {
   }, [username]);
 
   return (
-    <div className="p-4 sm:p-5 rounded-2xl bg-neutral-950/90 border border-neutral-800 hover:border-amber-400/40 transition-all shadow-xl text-white">
+    <div className="p-4 sm:p-5 rounded-2xl bg-neutral-950/90 border border-neutral-800 hover:border-sky-400/40 transition-all shadow-xl text-white">
       <div className="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-neutral-800">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-neutral-900 border border-neutral-700 text-amber-400">
+          <div className="p-2 rounded-xl bg-neutral-900 border border-neutral-700 text-sky-400">
             <Github size={20} />
           </div>
           <div>
@@ -42,7 +42,7 @@ const GithubStatsWidget = ({ username = "VP171097" }) => {
           href={`https://github.com/${username}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs text-amber-400 hover:underline font-semibold"
+          className="inline-flex items-center gap-1 text-xs text-sky-400 hover:underline font-semibold"
         >
           <span>Profile</span>
           <ExternalLink size={13} />
@@ -52,7 +52,7 @@ const GithubStatsWidget = ({ username = "VP171097" }) => {
       {/* Metrics Row */}
       <div className="grid grid-cols-3 gap-2 text-center">
         <div className="p-2.5 rounded-xl bg-neutral-900/80 border border-neutral-800">
-          <div className="flex items-center justify-center gap-1 text-amber-400 font-black text-base sm:text-lg">
+          <div className="flex items-center justify-center gap-1 text-sky-400 font-black text-base sm:text-lg">
             <BookOpen size={14} />
             <span>{userStats.publicRepos}</span>
           </div>

@@ -20,6 +20,9 @@ import {
 } from "lucide-react";
 import { MagicCard } from "@/components/magicui/magic-card";
 import { useConfig } from "@/context/ConfigContext";
+import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+
+const MOBILE_VISIBLE_ITEMS = 3;
 
 const getAssetHref = (path) => {
   if (!path) return "#";
@@ -37,6 +40,7 @@ const Achievements = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'timeline'
+  const [showAllItems, setShowAllItems] = useState(false);
   const [activeEmbedModal, setActiveEmbedModal] = useState(null); // For fullscreen Accredible embed modal
   const [expandedEmbeds, setExpandedEmbeds] = useState({}); // { [id]: boolean }
 
@@ -76,7 +80,7 @@ const Achievements = () => {
   if (loading || !achievementsConfig) {
     return (
       <div className="text-white text-center py-12">
-        <Sparkles className="animate-spin inline mr-2 text-amber-400" />
+        <Sparkles className="animate-spin inline mr-2 text-sky-400" />
         <span>Loading Achievements &amp; Credentials...</span>
       </div>
     );
@@ -86,21 +90,21 @@ const Achievements = () => {
     <div id="achievements" className="text-white scroll-mt-24">
       <MagicCard
         gradientSize={450}
-        gradientFrom="#4a16f4"
-        gradientTo="#f42116"
-        className="rounded-2xl xl:border-2 xl:p-8 py-6 px-4"
+        gradientFrom="#0ea5e9"
+        gradientTo="#22d3ee"
+        className="rounded-2xl glass xl:p-8 py-6 px-4"
       >
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 px-1">
           <div className="flex items-center">
-            <div className="bg-yellow-400 p-2.5 rounded-xl mr-4 shadow-lg shadow-yellow-500/20 text-black shrink-0">
+            <div className="bg-sky-400 p-2.5 rounded-xl mr-4 shadow-lg shadow-sky-500/20 text-black shrink-0">
               <Award size={24} />
             </div>
             <div>
               <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
                 {achievementsConfig.title || "Achievements & Credentials"}
               </h2>
-              <div className="bg-yellow-400 w-20 h-1 rounded-full mt-1.5"></div>
+              <div className="bg-sky-400 w-20 h-1 rounded-full mt-1.5"></div>
             </div>
           </div>
 
@@ -109,7 +113,7 @@ const Achievements = () => {
             <button
               onClick={() => setViewMode("grid")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${viewMode === "grid"
-                ? "bg-amber-400 text-black shadow-md"
+                ? "bg-sky-400 text-black shadow-md"
                 : "text-neutral-400 hover:text-white"
                 }`}
               title="Grid View"
@@ -120,7 +124,7 @@ const Achievements = () => {
             <button
               onClick={() => setViewMode("timeline")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${viewMode === "timeline"
-                ? "bg-amber-400 text-black shadow-md"
+                ? "bg-sky-400 text-black shadow-md"
                 : "text-neutral-400 hover:text-white"
                 }`}
               title="Timeline View"
@@ -151,7 +155,7 @@ const Achievements = () => {
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${activeCategory === cat.id
-                    ? "bg-amber-400 text-black shadow-md shadow-amber-500/20 scale-105"
+                    ? "bg-sky-400 text-black shadow-md shadow-sky-500/20 scale-105"
                     : "bg-neutral-900/90 text-neutral-300 hover:text-white hover:bg-neutral-800 border border-neutral-800"
                     }`}
                 >
@@ -177,7 +181,7 @@ const Achievements = () => {
               placeholder="Search credentials..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-neutral-900/90 border border-neutral-800 text-white placeholder-neutral-500 focus:outline-none focus:border-amber-400 transition shadow-inner"
+              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-neutral-900/90 border border-neutral-800 text-white placeholder-neutral-500 focus:outline-none focus:border-sky-400 transition shadow-inner"
             />
             {searchQuery && (
               <button
@@ -199,32 +203,41 @@ const Achievements = () => {
             </p>
           </div>
         ) : viewMode === "grid" ? (
+          <>
           /* ============================================================ */
           /* GRID VIEW */
           /* ============================================================ */
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {filteredItems.map((item) => {
+          <RevealGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+            {filteredItems.map((item, idx) => {
               const pdfUrl = getAssetHref(item.pdfFile || item.imageFile);
               const badgeUrl = getAssetHref(item.badge);
               const isDatabricks = item.category === "databricks" || item.type === "accredible";
               const isAward = item.category === "awards" || item.type === "award";
 
               return (
-                <article
+                <RevealItem
                   key={item.id}
-                  className="rounded-2xl bg-neutral-950/90 border border-neutral-800 hover:border-amber-400/50 transition-all duration-300 p-5 sm:p-6 shadow-xl flex flex-col justify-between group"
+                  /* Same phone-only truncation as the projects grid. */
+                  className={`h-full ${
+                    !showAllItems && idx >= MOBILE_VISIBLE_ITEMS
+                      ? "hidden sm:block"
+                      : ""
+                  }`}
+                >
+                <article
+                  className="card-cine h-full rounded-2xl bg-white/[0.03] border border-white/10 p-3.5 sm:p-6 shadow-xl flex flex-col justify-between group"
                 >
                   <div>
                     {/* Top Tag & Date Header */}
-                    <div className="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-neutral-800/80">
+                    <div className="flex items-center justify-between gap-2 mb-2 pb-2 sm:mb-3 sm:pb-3 border-b border-neutral-800/80">
                       <div className="flex items-center gap-2">
                         {isDatabricks ? (
-                          <span className="px-2.5 py-0.5 rounded-md bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[11px] font-bold tracking-wide flex items-center gap-1">
+                          <span className="px-2.5 py-0.5 rounded-md bg-sky-400/10 border border-sky-400/30 text-sky-400 text-[11px] font-bold tracking-wide flex items-center gap-1">
                             <BadgeCheck size={13} />
                             <span>Accredible Verified</span>
                           </span>
                         ) : isAward ? (
-                          <span className="px-2.5 py-0.5 rounded-md bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-[11px] font-bold tracking-wide flex items-center gap-1">
+                          <span className="px-2.5 py-0.5 rounded-md bg-sky-400/10 border border-sky-400/30 text-sky-400 text-[11px] font-bold tracking-wide flex items-center gap-1">
                             <Trophy size={13} />
                             <span>Enterprise Honor</span>
                           </span>
@@ -238,39 +251,39 @@ const Achievements = () => {
 
                       {item.date && (
                         <div className="flex items-center gap-1 text-xs text-neutral-400 font-mono font-medium">
-                          <Calendar size={12} className="text-amber-400" />
+                          <Calendar size={12} className="text-sky-400" />
                           <span>{item.date}</span>
                         </div>
                       )}
                     </div>
 
                     {/* Title & Issuer */}
-                    <div className="flex items-start gap-4 mb-3">
+                    <div className="flex items-start gap-3 sm:gap-4 mb-2 sm:mb-3">
                       {/* Badge / Icon Thumbnail */}
                       <div className="shrink-0">
                         {item.badge ? (
                           <img
                             src={badgeUrl}
                             alt={`${item.title} Badge`}
-                            className="h-12 w-12 object-contain filter drop-shadow-md group-hover:scale-110 transition-transform"
+                            className="h-9 w-9 sm:h-12 sm:w-12 object-contain filter drop-shadow-md group-hover:scale-110 transition-transform"
                             loading="lazy"
                           />
                         ) : isAward ? (
-                          <div className="p-3 rounded-xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400">
+                          <div className="p-3 rounded-xl bg-sky-400/10 border border-sky-400/20 text-sky-400">
                             <Trophy size={24} />
                           </div>
                         ) : (
-                          <div className="p-3 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-400">
+                          <div className="p-3 rounded-xl bg-sky-400/10 border border-sky-400/20 text-sky-400">
                             <BadgeCheck size={24} />
                           </div>
                         )}
                       </div>
 
                       <div className="min-w-0">
-                        <h3 className="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-amber-300 transition-colors">
+                        <h3 className="text-sm sm:text-lg font-bold text-white leading-snug group-hover:text-sky-300 transition-colors">
                           {item.title}
                         </h3>
-                        <p className="text-xs text-amber-400 font-semibold mt-0.5 flex items-center gap-1">
+                        <p className="text-xs text-sky-400 font-semibold mt-0.5 flex items-center gap-1">
                           <Building2 size={12} />
                           <span>{item.issuer || item.organization}</span>
                         </p>
@@ -279,7 +292,7 @@ const Achievements = () => {
 
                     {/* Description */}
                     {item.description && (
-                      <p className="text-xs text-neutral-300 leading-relaxed mb-4">
+                      <p className="text-xs text-neutral-300 leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                         {item.description}
                       </p>
                     )}
@@ -289,13 +302,13 @@ const Achievements = () => {
                       <div className="mb-4">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1">
-                            <Layers size={12} className="text-amber-400" />
+                            <Layers size={12} className="text-sky-400" />
                             <span>Official Accredible Embed</span>
                           </span>
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => toggleEmbed(item.id)}
-                              className="text-[11px] font-bold text-amber-400 hover:text-amber-300 underline cursor-pointer"
+                              className="text-[11px] font-bold text-sky-400 hover:text-sky-300 underline cursor-pointer"
                             >
                               {expandedEmbeds[item.id] ? "Hide Embed" : "Show Full Embed"}
                             </button>
@@ -334,7 +347,7 @@ const Achievements = () => {
                           href={item.verifyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-black text-xs font-extrabold shadow-sm transition hover:scale-105 shrink-0"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-400 hover:bg-sky-300 text-black text-xs font-extrabold shadow-sm transition hover:scale-105 shrink-0"
                           title="Verify credential authenticity on official portal"
                         >
                           <ExternalLink size={13} />
@@ -348,10 +361,10 @@ const Achievements = () => {
                           href={badgeUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-amber-400 text-xs font-bold text-neutral-200 transition hover:scale-105 shrink-0"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-sky-400 text-xs font-bold text-neutral-200 transition hover:scale-105 shrink-0"
                           title="View badge in a new tab"
                         >
-                          <Download size={13} className="text-amber-400" />
+                          <Download size={13} className="text-sky-400" />
                           <span>View Badge</span>
                         </a>
                       )}
@@ -361,7 +374,7 @@ const Achievements = () => {
                         href={pdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-amber-400 text-xs font-bold text-neutral-200 transition hover:scale-105 shrink-0"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-sky-400 text-xs font-bold text-neutral-200 transition hover:scale-105 shrink-0"
                         title="Open certificate in a new browser tab"
                       >
                         <Eye size={13} className="text-cyan-400" />
@@ -370,28 +383,40 @@ const Achievements = () => {
                     </div>
                   </div>
                 </article>
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealGroup>
+
+          {filteredItems.length > MOBILE_VISIBLE_ITEMS && !showAllItems && (
+            <button
+              type="button"
+              onClick={() => setShowAllItems(true)}
+              className="sm:hidden btn-cine mt-4 w-full py-2.5 rounded-xl border border-sky-400/40 bg-sky-400/10 text-sky-300 text-sm font-semibold cursor-pointer"
+            >
+              Show all {filteredItems.length}
+            </button>
+          )}
+          </>
         ) : (
           /* ============================================================ */
           /* CHRONOLOGICAL TIMELINE VIEW */
           /* ============================================================ */
-          <div className="relative border-l-2 border-amber-400/40 ml-4 sm:ml-8 pl-6 sm:pl-8 space-y-8 py-2">
+          <div className="relative border-l-2 border-sky-400/40 ml-4 sm:ml-8 pl-6 sm:pl-8 space-y-8 py-2">
             {filteredItems.map((item) => {
               const pdfUrl = getAssetHref(item.pdfFile || item.imageFile);
 
               return (
                 <div key={item.id} className="relative group">
                   {/* Timeline Dot */}
-                  <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-amber-400 border-4 border-black group-hover:scale-125 transition-transform shadow-md shadow-amber-500/50"></div>
+                  <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-sky-400 border-4 border-black group-hover:scale-125 transition-transform shadow-md shadow-sky-500/50"></div>
 
-                  <div className="rounded-2xl bg-neutral-950/90 border border-neutral-800 hover:border-amber-400/50 p-5 shadow-lg transition">
+                  <div className="rounded-2xl bg-neutral-950/90 border border-neutral-800 hover:border-sky-400/50 p-5 shadow-lg transition">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-amber-300">
+                      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-sky-300">
                         {item.title}
                       </h3>
-                      <span className="text-xs text-amber-400 font-mono font-semibold">
+                      <span className="text-xs text-sky-400 font-mono font-semibold">
                         {item.date}
                       </span>
                     </div>
@@ -413,7 +438,7 @@ const Achievements = () => {
                           href={item.verifyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold transition"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-400 hover:bg-sky-300 text-black text-xs font-bold transition"
                         >
                           <ExternalLink size={12} />
                           <span>Verify</span>
@@ -423,7 +448,7 @@ const Achievements = () => {
                         href={pdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-neutral-900 border border-neutral-700 text-xs font-bold text-neutral-200 hover:border-amber-400 transition"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-neutral-900 border border-neutral-700 text-xs font-bold text-neutral-200 hover:border-sky-400 transition"
                       >
                         <Eye size={12} className="text-cyan-400" />
                         <span>View</span>
@@ -447,7 +472,7 @@ const Achievements = () => {
               {/* Modal Header */}
               <div className="flex items-center justify-between p-4 border-b border-neutral-800">
                 <div className="flex items-center gap-2">
-                  <BadgeCheck size={20} className="text-amber-400" />
+                  <BadgeCheck size={20} className="text-sky-400" />
                   <h3 className="text-sm sm:text-base font-bold text-white truncate max-w-md">
                     {activeEmbedModal.title}
                   </h3>
@@ -477,7 +502,7 @@ const Achievements = () => {
                   href={activeEmbedModal.verifyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-sky-400 hover:bg-sky-300 text-black text-xs font-bold flex items-center gap-1.5"
                 >
                   <ExternalLink size={13} />
                   <span>Verify on Accredible</span>

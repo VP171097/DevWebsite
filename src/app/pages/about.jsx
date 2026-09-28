@@ -1,98 +1,192 @@
 import React from "react";
-import { PointerHighlight } from "@/components/ui/pointer-highlight";
+import { motion } from "motion/react";
 import { useConfig } from "@/context/ConfigContext";
-import { Sparkles, Zap, Server, CheckCircle } from "lucide-react";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import CountUp from "@/components/ui/CountUp";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
+import { Zap, Server, Sparkles, CheckCircle, MapPin, BadgeCheck } from "lucide-react";
 
 const statIcons = [Zap, Server, Sparkles, CheckCircle];
 
 const About = () => {
   const { config, loading } = useConfig();
   const aboutConfig = config.about;
+  const sidebarConfig = config.sidebar;
+  const skillsConfig = config.skills;
+  const reduced = usePrefersReducedMotion();
 
   if (loading || !aboutConfig) {
-    return (
-      <section className="text-white px-6 py-8">
-        Loading About Section...
-      </section>
-    );
+    return <section className="text-white px-6 py-8">Loading About…</section>;
   }
 
-  const [beforeHighlight, afterHighlight] = aboutConfig.description1?.includes(
-    aboutConfig.highlight
-  )
-    ? aboutConfig.description1.split(aboutConfig.highlight)
-    : [aboutConfig.description1 || "", ""];
+  // Top skill signals, taken straight from the real skills config.
+  const topSkills = (skillsConfig?.technicalSkills || [])
+    .slice()
+    .sort((a, b) => (b.proficiency || 0) - (a.proficiency || 0))
+    .slice(0, 6);
+
+  const location = sidebarConfig?.contacts?.find((c) => c.type === "location")?.value;
 
   return (
     <section
       id="about"
-      className="xl:px-6 px-5 py-8 xl:rounded-2xl bg-black/50 scroll-mt-20"
+      className="scroll-mt-24 relative"
+      aria-labelledby="about-heading"
     >
-      <div className="items-center gap-3 mb-3">
-        <h2 className="text-white xl:text-2xl text-xl font-bold mb-3">
-          {aboutConfig.title}
-        </h2>
-        <div className="bg-yellow-400 w-16 h-1 rounded-sm"></div>
-      </div>
+      {/* Subtle animated grid backdrop, scoped to this section */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 rounded-2xl opacity-[0.35]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent)",
+        }}
+      />
 
-      {/* First Paragraph */}
-      <div className="text-gray-300 text-sm mb-4 leading-relaxed">
-        {beforeHighlight}
-        <span className="inline-flex mx-1">
-          <PointerHighlight
-            rectangleClassName="bg-muted rounded-lg dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600"
-            pointerClassName="text-yellow-500"
-          >
-            <span className="relative z-10 text-amber-300 text-sm md:text-base font-bold px-2 py-1">
-              {aboutConfig.highlight}
-            </span>
-          </PointerHighlight>
-        </span>
-        {afterHighlight}
-      </div>
-
-      {/* Second Paragraph (Always fully visible on both desktop & mobile) */}
-      <div className="text-gray-300 text-sm leading-relaxed mb-6">
-        <p>{aboutConfig.description2}</p>
-      </div>
-
-      {/* Key Metrics & Stats Counter Grid */}
-      {Array.isArray(aboutConfig.stats) && aboutConfig.stats.length > 0 && (
-        <div className={`grid gap-3 pt-4 border-t border-neutral-800 ${
-          aboutConfig.stats.length === 3
-            ? "grid-cols-1 sm:grid-cols-3"
-            : "grid-cols-2 md:grid-cols-4"
-        }`}>
-          {aboutConfig.stats.map((stat, idx) => {
-            const Icon = statIcons[idx % statIcons.length];
-            return (
-              <div
-                key={idx}
-                className="group p-3.5 rounded-xl bg-neutral-950/80 border border-neutral-800 hover:border-amber-400/50 transition-all duration-300 hover:shadow-md hover:shadow-amber-500/10 flex flex-col justify-between"
+      <div className="glass rounded-2xl px-4 py-7 xl:px-8 xl:py-9">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-8 items-start">
+          {/* ---- Left: professional intro ---- */}
+          <div>
+            <Reveal>
+              <p className="eyebrow">Profile</p>
+              <h2
+                id="about-heading"
+                className="text-2xl md:text-3xl font-bold text-white mt-3"
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-lg sm:text-xl md:text-2xl font-black bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
-                    {stat.value}
-                  </span>
-                  <div className="p-1.5 rounded-lg bg-amber-400/10 text-amber-400 group-hover:scale-110 transition-transform">
-                    <Icon size={14} />
-                  </div>
+                {aboutConfig.title}
+              </h2>
+              <div className="bg-sky-400 w-14 h-[3px] rounded-sm mt-3" />
+            </Reveal>
+
+            <Reveal delay={0.08} className="mt-5">
+              <p className="text-neutral-300 text-sm leading-relaxed">
+                {aboutConfig.description1}
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.14} className="mt-4">
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                {aboutConfig.description2}
+              </p>
+            </Reveal>
+
+            {/* Real metrics */}
+            {Array.isArray(aboutConfig.stats) && aboutConfig.stats.length > 0 && (
+              <RevealGroup className="grid grid-cols-2 gap-3 mt-7 pt-6 border-t border-white/10">
+                {aboutConfig.stats.map((stat, idx) => {
+                  const Icon = statIcons[idx % statIcons.length];
+                  return (
+                    <RevealItem key={idx}>
+                      <div className="card-cine h-full rounded-xl border border-white/10 bg-white/[0.03] p-3.5 flex flex-col justify-between">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm sm:text-base font-bold text-sky-300 leading-tight">
+                            <CountUp value={stat.value} />
+                          </span>
+                          <span className="card-icon p-1.5 rounded-lg bg-sky-400/10 text-sky-400">
+                            <Icon size={13} />
+                          </span>
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-semibold text-white leading-tight">
+                            {stat.label}
+                          </p>
+                          {stat.sub && (
+                            <p className="text-[10px] text-neutral-500 mt-0.5 leading-tight">
+                              {stat.sub}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </RevealItem>
+                  );
+                })}
+              </RevealGroup>
+            )}
+          </div>
+
+          {/* ---- Right: data engineer profile card ---- */}
+          <motion.aside
+            initial={reduced ? false : { opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="glass rounded-2xl p-5 relative overflow-hidden"
+            aria-label="Data engineer profile"
+          >
+            <div className="ambient-glow bg-sky-500/25 w-56 h-56 -top-24 -right-16" />
+
+            <div className="relative flex items-center gap-4">
+              {sidebarConfig?.avatar && (
+                <div className="relative shrink-0">
+                  <img
+                    src={sidebarConfig.avatar}
+                    alt={`${sidebarConfig.name} portrait`}
+                    loading="lazy"
+                    className="w-16 h-16 rounded-2xl object-cover border border-white/15 shadow-lg shadow-sky-500/10 transition-transform duration-300 hover:scale-105"
+                  />
+                  <span className="absolute -inset-1 rounded-2xl ring-1 ring-sky-400/25 pointer-events-none" />
                 </div>
-                <div>
-                  <p className="text-xs font-semibold text-white leading-tight">
-                    {stat.label}
-                  </p>
-                  {stat.sub && (
-                    <p className="text-[10px] text-gray-400 mt-0.5 leading-tight">
-                      {stat.sub}
-                    </p>
-                  )}
-                </div>
+              )}
+              <div className="min-w-0">
+                <p className="text-base font-bold text-white truncate">
+                  {sidebarConfig?.name}
+                </p>
+                <p className="text-[11px] text-neutral-400 leading-snug mt-0.5">
+                  {sidebarConfig?.role}
+                </p>
               </div>
-            );
-          })}
+            </div>
+
+            <div className="relative mt-4 space-y-2">
+              {sidebarConfig?.status && (
+                <p className="inline-flex items-center gap-2 text-[11px] font-semibold text-emerald-300">
+                  <BadgeCheck size={13} />
+                  {sidebarConfig.status}
+                </p>
+              )}
+              {location && (
+                <p className="flex items-center gap-2 text-[11px] text-neutral-400">
+                  <MapPin size={13} className="text-sky-400" />
+                  {location}
+                </p>
+              )}
+            </div>
+
+            {/* Skill signal bars, from real proficiency data */}
+            {topSkills.length > 0 && (
+              <RevealGroup className="relative mt-5 pt-4 border-t border-white/10 space-y-2.5">
+                {topSkills.map((skill) => (
+                  <RevealItem key={skill.name} y={12}>
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] mb-1">
+                        <span className="text-neutral-200 font-medium">
+                          {skill.name}
+                        </span>
+                        <span className="text-sky-400 font-mono">
+                          {skill.proficiency}%
+                        </span>
+                      </div>
+                      <div className="h-1.5 w-full rounded-full bg-white/5 overflow-hidden">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-sky-500 to-cyan-300"
+                          initial={reduced ? false : { width: 0 }}
+                          whileInView={{ width: `${skill.proficiency}%` }}
+                          viewport={{ once: true, amount: 0.6 }}
+                          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                          style={reduced ? { width: `${skill.proficiency}%` } : undefined}
+                        />
+                      </div>
+                    </div>
+                  </RevealItem>
+                ))}
+              </RevealGroup>
+            )}
+          </motion.aside>
         </div>
-      )}
+      </div>
     </section>
   );
 };

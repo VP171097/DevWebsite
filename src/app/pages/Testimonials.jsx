@@ -7,6 +7,11 @@ const Testimonials = () => {
   const { config, loading } = useConfig();
   const testimonialsConfig = config.testimonials;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [expanded, setExpanded] = useState(false);
+
+  // Long recommendations are clamped on small screens; collapse again when
+  // moving to another one so each starts in the same compact state.
+  useEffect(() => setExpanded(false), [currentIndex]);
   const itemCount = testimonialsConfig?.testimonials?.length || 0;
 
   useEffect(() => {
@@ -37,15 +42,15 @@ const Testimonials = () => {
     <div id="testimonials" className="text-white scroll-mt-24">
       <MagicCard
         gradientSize={400}
-        gradientFrom="#4a16f4"
-        gradientTo="#f42116"
-        className="rounded-2xl xl:border-2 xl:p-8 py-6 px-4"
+        gradientFrom="#0ea5e9"
+        gradientTo="#22d3ee"
+        className="rounded-2xl glass xl:p-8 py-6 px-4"
       >
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3 px-1">
           <div className="flex items-center">
-            <div className="bg-yellow-400 p-2 rounded-md mr-4 shadow-md shadow-yellow-500/20">
-              <MessageSquareQuote size={22} className="text-black" />
+            <div className="bg-sky-400 p-2 rounded-md mr-4 shadow-md shadow-sky-500/20">
+              <MessageSquareQuote size={22} className="text-slate-950" />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -57,7 +62,7 @@ const Testimonials = () => {
                   <span>Verified</span>
                 </span>
               </div>
-              <div className="bg-yellow-400 w-16 h-1 rounded-sm mt-1"></div>
+              <div className="bg-sky-400 w-16 h-1 rounded-sm mt-1"></div>
             </div>
           </div>
 
@@ -93,7 +98,7 @@ const Testimonials = () => {
         <div className="relative p-6 sm:p-8 rounded-2xl bg-neutral-950/90 border border-neutral-800 shadow-2xl overflow-hidden min-h-[300px] flex flex-col justify-between">
           <Quote
             size={72}
-            className="absolute -top-2 -left-2 text-amber-500/10 pointer-events-none"
+            className="absolute -top-2 -left-2 text-sky-500/10 pointer-events-none"
           />
 
           <div className="relative z-10 flex flex-col justify-between h-full">
@@ -113,8 +118,21 @@ const Testimonials = () => {
             </div>
 
             {/* Recommendation Quote Content */}
-            <div className="text-sm sm:text-base text-neutral-200 leading-relaxed mb-6 font-normal space-y-3 whitespace-pre-line">
-              "{current.quote}"
+            <div className="mb-4 sm:mb-6">
+              <div
+                className={`text-sm sm:text-base text-neutral-200 leading-relaxed font-normal space-y-3 whitespace-pre-line ${
+                  expanded ? "" : "line-clamp-[10] sm:line-clamp-none"
+                }`}
+              >
+                "{current.quote}"
+              </div>
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                className="sm:hidden mt-2 text-xs font-semibold text-sky-400 hover:text-sky-300 cursor-pointer"
+              >
+                {expanded ? "Show less" : "Read full recommendation"}
+              </button>
             </div>
 
             {/* Author Profile Footer */}
@@ -123,7 +141,7 @@ const Testimonials = () => {
                 <img
                   src={current.avatar}
                   alt={current.name}
-                  className="w-12 h-12 rounded-xl bg-neutral-900 border border-amber-400/40 p-0.5 object-cover shadow-md"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-neutral-900 border border-sky-400/40 p-0.5 object-cover shadow-md"
                 />
                 <div>
                   <div className="flex items-center gap-2">
@@ -132,7 +150,7 @@ const Testimonials = () => {
                     </h4>
                     <span className="text-[10px] text-neutral-400 font-mono">1st</span>
                   </div>
-                  <p className="text-xs text-amber-300 font-medium">
+                  <p className="text-xs text-sky-300 font-medium">
                     {current.role}
                   </p>
                   {current.headline && (
@@ -158,7 +176,7 @@ const Testimonials = () => {
               onClick={() => setCurrentIndex(idx)}
               className={`px-3 py-1 text-xs rounded-lg transition-all cursor-pointer ${
                 idx === currentIndex
-                  ? "bg-amber-400 text-black font-bold shadow-md shadow-amber-400/20 scale-105"
+                  ? "bg-sky-400 text-black font-bold shadow-md shadow-sky-400/20 scale-105"
                   : "bg-neutral-900 text-neutral-400 border border-neutral-800 hover:text-white hover:border-neutral-700"
               }`}
               aria-label={`View endorsement by ${item.name}`}

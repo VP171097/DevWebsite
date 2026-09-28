@@ -1,175 +1,239 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link as ScrollLink } from "react-scroll";
-import { Ripple } from "@/components/magicui/ripple";
-import { AuroraText } from "@/components/magicui/aurora-text";
-import { TypingAnimation } from "@/components/magicui/typing-animation";
-import { Particles } from "@/components/magicui/particles";
-import { Scrollui } from "@/components/ui/scrollui";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
+import { motion } from "motion/react";
 import SocialLinks from "@/components/layouts/socialLink";
+import DataPipelineFlow from "@/components/ui/DataPipelineFlow";
+import CountUp from "@/components/ui/CountUp";
 import { useConfig } from "@/context/ConfigContext";
-import { Download, Sparkles, BookOpen, Terminal, Database } from "lucide-react";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
+import { Download, ArrowRight, BookOpen, ChevronDown } from "lucide-react";
+
+const EASE = [0.22, 1, 0.36, 1];
 
 const LandingPage = () => {
   const { config, loading } = useConfig();
   const landingConfig = config.landing;
-
-  const roles = landingConfig?.roles || [
-    "Senior Data Engineer",
-    "Databricks Data Engineer",
-    "Real-Time Streaming Engineer",
-    "Cloud ETL & Pipeline Automation Expert"
-  ];
-
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3200);
-    return () => clearInterval(interval);
-  }, [roles.length]);
+  const reduced = usePrefersReducedMotion();
 
   if (loading || !landingConfig) {
     return (
       <div className="flex items-center justify-center h-screen bg-background text-foreground">
-        Loading Showcase...
+        Loading…
       </div>
     );
   }
 
   const notesUrl = `${import.meta.env.BASE_URL}?page=notes`;
 
+  // Entrance sequence — deliberately fast; the page never feels like a wait.
+  const seq = (delay) =>
+    reduced
+      ? { initial: false, animate: { opacity: 1, y: 0, scale: 1 } }
+      : {
+          initial: { opacity: 0, y: 24 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.6, delay, ease: EASE },
+        };
+
+  const headlineWords = ["Building", "Data", "Systems", "That", "Scale."];
+
   return (
-    <div className="relative min-h-[92vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden pt-8 pb-16">
-      {/* Background Particles */}
-      <Particles
-        className="fixed inset-0 w-full h-full -z-10"
-        quantity={180}
-        ease={40}
-        refresh
-      />
+    <section
+      id="landing"
+      className="relative min-h-[92vh] flex flex-col justify-center items-center px-5 sm:px-8 pt-16 pb-20 overflow-hidden section-fade"
+      aria-label="Introduction"
+    >
+      {/* Ambient lighting */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10"
+        initial={reduced ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.1, ease: EASE }}
+      >
+        <div className="ambient-glow bg-sky-500/25 w-[520px] h-[520px] -top-40 -left-32" />
+        <div className="ambient-glow bg-indigo-500/15 w-[420px] h-[420px] top-10 right-0" />
+      </motion.div>
 
-      {/* Top Engineering Badge */}
-      <div className="z-10 mb-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/10 border border-amber-500/30 text-amber-500 dark:text-amber-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg backdrop-blur-md animate-pulse">
-        <Database size={15} className="text-amber-500 dark:text-amber-400" />
-        <span>Enterprise Data Engineering &amp; Cloud Lakehouse</span>
-      </div>
+      <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
+        {/* Eyebrow */}
+        <motion.p
+          {...seq(0.05)}
+          className="eyebrow inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass whitespace-nowrap !text-[0.6rem] sm:!text-[0.7rem] !tracking-[0.18em] sm:!tracking-[0.28em]"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+          Data Engineer • Cloud • Big Data
+        </motion.p>
 
-      {/* Hero Name Header */}
-      <div className="z-10 mb-3 max-w-5xl">
-        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-neutral-900 dark:text-white tracking-tight leading-none">
-          {landingConfig.firstName}{" "}
-          <AuroraText>{landingConfig.lastName}</AuroraText>
+        {/* Name */}
+        <motion.p
+          {...seq(0.12)}
+          className="mt-7 text-sm sm:text-base font-semibold tracking-[0.32em] uppercase text-neutral-400"
+        >
+          {landingConfig.firstName} {landingConfig.lastName}
+        </motion.p>
+
+        {/* Headline — staggered word reveal */}
+        {/* The per-word spans animate independently, which leaves the accessible
+            name as one run-on token. aria-label carries the real sentence and
+            the spans are hidden from assistive tech. */}
+        <h1
+          className="mt-3 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] text-white"
+          aria-label={headlineWords.join(" ")}
+        >
+          {headlineWords.map((word, i) => (
+            <motion.span
+              key={word}
+              aria-hidden="true"
+              className="inline-block mr-[0.28em]"
+              initial={reduced ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.2 + i * 0.08, ease: EASE }}
+            >
+              {i >= 3 ? (
+                <span className="bg-gradient-to-r from-sky-300 to-sky-500 bg-clip-text text-transparent">
+                  {word}
+                </span>
+              ) : (
+                word
+              )}
+            </motion.span>
+          ))}
         </h1>
 
-        {/* Dynamic Role Tagline */}
-        <div className="h-10 sm:h-12 flex items-center justify-center mt-3 mb-2">
-          <div className="hero-role-text inline-flex items-center gap-2 text-lg sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-900 via-amber-600 to-amber-700 dark:from-gray-200 dark:via-amber-200 dark:to-amber-400 bg-clip-text text-transparent transition-all duration-500">
-            <Terminal size={22} className="text-amber-500 dark:text-amber-400 inline shrink-0" />
-            <span>{roles[currentRoleIndex]}</span>
-          </div>
-        </div>
+        {/* Supporting statement — real specializations from the resume */}
+        <motion.p
+          {...seq(0.55)}
+          className="mt-6 mx-auto max-w-2xl text-sm sm:text-base leading-relaxed text-neutral-400"
+        >
+          {landingConfig.summary}
+        </motion.p>
 
-        {/* Subtitle / Focus technologies */}
-        <TypingAnimation className="text-xs sm:text-sm md:text-base text-neutral-700 dark:text-gray-300 font-mono max-w-2xl mx-auto px-4 leading-relaxed font-semibold">
-          {landingConfig.title}
-        </TypingAnimation>
+        {/* Primary CTAs */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.68, ease: EASE }}
+          className="mt-9 flex flex-wrap items-center justify-center gap-3"
+        >
+          <ScrollLink
+            to="projects"
+            smooth
+            duration={600}
+            offset={-88}
+            tabIndex={0}
+            className="btn-cine inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-sm font-bold shadow-lg shadow-sky-500/25 cursor-pointer"
+          >
+            <span>View My Work</span>
+            <ArrowRight size={16} className="btn-arrow" />
+          </ScrollLink>
 
-        {/* Professional Credential Badges */}
-        {Array.isArray(landingConfig.badges) && landingConfig.badges.length > 0 && (
-          <div className="z-10 mt-3 flex items-center justify-center gap-3">
-            {landingConfig.badges.map((badge, idx) => (
-              <a
-                key={idx}
-                href={badge.link || "#"}
-                target={badge.link ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center justify-center transition-all duration-300 hover:scale-115 cursor-pointer drop-shadow-md hover:drop-shadow-lg"
-                title={badge.name}
-              >
-                <img
+          <a
+            href={landingConfig.resumeLink}
+            download="Vivek_Pandey_Senior_Data_Engineer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-cine inline-flex items-center gap-2 px-6 py-3 rounded-xl glass text-white text-sm font-semibold hover:border-sky-400/50"
+          >
+            <Download size={16} />
+            <span>Download Resume</span>
+          </a>
+
+          <a
+            href={notesUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-cine inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sky-300 text-sm font-semibold hover:text-sky-200"
+          >
+            <BookOpen size={16} />
+            <span>DE Cheat Sheets</span>
+          </a>
+        </motion.div>
+
+        {/* Secondary links */}
+        <motion.div
+          {...seq(0.78)}
+          className="mt-5 flex items-center justify-center gap-1"
+        >
+          <SocialLinks />
+        </motion.div>
+
+        {/* Focus technologies + accreditation badges */}
+        <motion.div
+          {...seq(0.86)}
+          className="mt-8 flex flex-col items-center gap-4"
+        >
+          <p className="font-mono text-[11px] sm:text-xs tracking-wide text-neutral-500">
+            {landingConfig.title}
+          </p>
+
+          {Array.isArray(landingConfig.badges) && landingConfig.badges.length > 0 && (
+            <div className="flex items-center justify-center gap-3">
+              {landingConfig.badges.map((badge, idx) => (
+                <motion.img
+                  key={idx}
                   src={badge.image}
                   alt={badge.name}
-                  className="h-10 sm:h-12 w-auto object-contain"
+                  title={badge.name}
                   loading="lazy"
+                  className="h-11 sm:h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+                  initial={reduced ? false : { opacity: 0, y: 12 }}
+                  animate={{ opacity: 0.9, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.9 + idx * 0.07, ease: EASE }}
                 />
-              </a>
+              ))}
+            </div>
+          )}
+        </motion.div>
+
+        {/* Real headline stats */}
+        {Array.isArray(landingConfig.stats) && landingConfig.stats.length > 0 && (
+          <motion.dl
+            {...seq(1.0)}
+            className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto"
+          >
+            {landingConfig.stats.map((stat, idx) => (
+              <div
+                key={idx}
+                className="card-cine glass rounded-xl px-3 py-4 flex flex-col items-center"
+              >
+                <dt className="sr-only">{stat.label}</dt>
+                <dd className="text-base sm:text-xl font-bold text-sky-300">
+                  <CountUp value={stat.value} />
+                </dd>
+                <span className="mt-1 text-[11px] text-neutral-400 text-center leading-tight">
+                  {stat.label}
+                </span>
+              </div>
             ))}
-          </div>
+          </motion.dl>
         )}
       </div>
 
-      {/* Executive Quick Stats Banner */}
-      {Array.isArray(landingConfig.stats) && landingConfig.stats.length > 0 && (
-        <div className="z-10 my-6 grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 max-w-4xl w-full px-2">
-          {landingConfig.stats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="p-3 sm:p-4 rounded-xl bg-white/90 dark:bg-neutral-950/80 border border-neutral-200 dark:border-neutral-800 backdrop-blur-md shadow-md flex flex-col items-center justify-center hover:border-amber-400/50 transition-colors"
-            >
-              <span className="text-lg sm:text-2xl font-black text-amber-500 dark:text-amber-400">
-                {stat.value}
-              </span>
-              <span className="text-[11px] sm:text-xs text-neutral-700 dark:text-neutral-300 font-medium mt-0.5">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Data pipeline visualisation */}
+      <motion.div
+        initial={reduced ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.15, ease: EASE }}
+        className="relative z-0 w-full max-w-5xl mx-auto mt-12 hidden sm:block"
+      >
+        <DataPipelineFlow />
+      </motion.div>
 
-      {/* Primary Action Buttons */}
-      <div className="z-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8">
-        <ShimmerButton
-          onClick={() => window.open(landingConfig.resumeLink, "_blank")}
-          className="resume-cta flex items-center gap-2 font-bold px-6 py-3"
-        >
-          <Download size={16} />
-          <span>Download Resume (PDF)</span>
-        </ShimmerButton>
-
-        <ScrollLink
-          to="projects"
-          smooth={true}
-          duration={500}
-          offset={-80}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-900/90 dark:hover:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:border-amber-400 text-neutral-900 dark:text-white text-sm font-semibold cursor-pointer transition-all shadow-md hover:scale-105"
-        >
-          <Sparkles size={16} className="text-amber-500 dark:text-amber-400" />
-          <span>Explore Projects</span>
-        </ScrollLink>
-
-        {/* Dedicated DE Notes button opening in a new tab */}
-        <a
-          href={notesUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-700 dark:text-amber-300 text-sm font-semibold transition-all shadow-md hover:scale-105"
-        >
-          <BookOpen size={16} className="text-amber-500 dark:text-amber-400" />
-          <span>Data Engineering Cheat Sheets</span>
-        </a>
-      </div>
-
-      {/* Social Icons (Mobile) */}
-      <div className="z-10 mt-2 flex gap-6 xl:hidden">
-        <SocialLinks />
-      </div>
-
-      {/* Social Icons (Desktop Floating Dock) */}
-      <div className="hidden xl:flex flex-col gap-2 absolute top-1/2 right-4 2xl:right-8 -translate-y-1/2 z-20 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-md p-2 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-2xl">
-        <SocialLinks />
-      </div>
-
-      {/* Scroll Down UI */}
-      <div className="absolute bottom-4 z-20">
-        <Scrollui />
-      </div>
-
-      {/* Ripple Background */}
-      <Ripple />
-    </div>
+      {/* Scroll cue */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 text-neutral-600"
+        initial={reduced ? false : { opacity: 0 }}
+        animate={{ opacity: 1, y: reduced ? 0 : [0, 7, 0] }}
+        transition={{
+          opacity: { duration: 0.6, delay: 1.3 },
+          y: { duration: 2.4, repeat: Infinity, ease: "easeInOut" },
+        }}
+      >
+        <ChevronDown size={22} />
+      </motion.div>
+    </section>
   );
 };
 

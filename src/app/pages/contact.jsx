@@ -92,12 +92,12 @@ const ContactSection = () => {
         {/* Form Section */}
         <MagicCard
           gradientSize={400}
-          gradientFrom="#4a16f4"
-          gradientTo="#f42116"
+          gradientFrom="#0ea5e9"
+          gradientTo="#22d3ee"
           className="rounded-2xl w-full xl:w-3/5 text-white p-6 md:p-8"
         >
           <div className="text-left mb-6">
-            <p className="text-xs tracking-widest text-amber-400 font-bold mb-1">
+            <p className="text-xs tracking-widest text-sky-400 font-bold mb-1">
               LET'S CONNECT
             </p>
             <h2 className="text-2xl sm:text-3xl font-black mb-2">
@@ -131,7 +131,7 @@ const ContactSection = () => {
                 htmlFor="name"
                 className="flex items-center text-xs font-semibold text-gray-300 mb-1"
               >
-                <User className="w-3.5 h-3.5 mr-1.5 text-amber-400" />
+                <User className="w-3.5 h-3.5 mr-1.5 text-sky-400" />
                 Full Name
               </label>
               <input
@@ -139,7 +139,7 @@ const ContactSection = () => {
                 id="name"
                 name="name"
                 required
-                className={`w-full rounded-xl border ${errors.name ? "border-red-500" : "border-neutral-800 focus:border-amber-400"
+                className={`w-full rounded-xl border ${errors.name ? "border-red-500" : "border-neutral-800 focus:border-sky-400"
                   } bg-neutral-900/90 text-white p-3 text-xs sm:text-sm focus:outline-none transition`}
                 placeholder="e.g. Alex Morgan"
               />
@@ -154,7 +154,7 @@ const ContactSection = () => {
                 htmlFor="email"
                 className="flex items-center text-xs font-semibold text-gray-300 mb-1"
               >
-                <Mail className="w-3.5 h-3.5 mr-1.5 text-amber-400" />
+                <Mail className="w-3.5 h-3.5 mr-1.5 text-sky-400" />
                 Email Address
               </label>
               <input
@@ -162,7 +162,7 @@ const ContactSection = () => {
                 id="email"
                 name="email"
                 required
-                className={`w-full rounded-xl border ${errors.email ? "border-red-500" : "border-neutral-800 focus:border-amber-400"
+                className={`w-full rounded-xl border ${errors.email ? "border-red-500" : "border-neutral-800 focus:border-sky-400"
                   } bg-neutral-900/90 text-white p-3 text-xs sm:text-sm focus:outline-none transition`}
                 placeholder="alex@company.com"
               />
@@ -177,7 +177,7 @@ const ContactSection = () => {
                 htmlFor="message"
                 className="flex items-center text-xs font-semibold text-gray-300 mb-1"
               >
-                <MessageSquare className="w-3.5 h-3.5 mr-1.5 text-amber-400" />
+                <MessageSquare className="w-3.5 h-3.5 mr-1.5 text-sky-400" />
                 Message
               </label>
               <textarea
@@ -185,7 +185,7 @@ const ContactSection = () => {
                 name="message"
                 rows="4"
                 required
-                className={`w-full rounded-xl border ${errors.message ? "border-red-500" : "border-neutral-800 focus:border-amber-400"
+                className={`w-full rounded-xl border ${errors.message ? "border-red-500" : "border-neutral-800 focus:border-sky-400"
                   } bg-neutral-900/90 text-white p-3 text-xs sm:text-sm focus:outline-none transition leading-relaxed`}
                 placeholder="Let's collaborate on a Big Data or Databricks project..."
               />
@@ -200,7 +200,7 @@ const ContactSection = () => {
               disabled={loading}
               className={`w-full flex justify-center items-center gap-2 py-3 rounded-xl font-bold text-xs sm:text-sm transition cursor-pointer ${loading
                 ? "bg-neutral-800 text-neutral-400 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-400 text-black shadow-lg shadow-amber-500/20 hover:scale-[1.01]"
+                : "bg-sky-500 hover:bg-sky-400 text-black shadow-lg shadow-sky-500/20 hover:scale-[1.01]"
                 }`}
             >
               {loading ? (
@@ -241,7 +241,7 @@ const ContactSection = () => {
         <div className="w-full xl:w-2/5 flex flex-col justify-between gap-4">
           {/* Compact Direct Channels Card */}
           <div className="p-4 sm:p-5 rounded-2xl bg-neutral-950/90 border border-neutral-800 text-white shadow-xl">
-            <h3 className="text-base font-bold text-amber-400 mb-3 flex items-center gap-2">
+            <h3 className="text-base font-bold text-sky-400 mb-3 flex items-center gap-2">
               <Sparkles size={16} />
               <span>Direct Channels</span>
             </h3>
@@ -249,14 +249,14 @@ const ContactSection = () => {
             <div className="space-y-2.5">
               <a
                 href="mailto:vivekpandey.iimt@gmail.com"
-                className="flex items-center gap-3 p-2.5 rounded-xl bg-neutral-900/80 hover:bg-neutral-800/90 border border-neutral-800 hover:border-amber-400/50 transition group"
+                className="flex items-center gap-3 p-2.5 rounded-xl bg-neutral-900/80 hover:bg-neutral-800/90 border border-neutral-800 hover:border-sky-400/50 transition group"
               >
-                <div className="p-2 rounded-lg bg-amber-400/10 text-amber-400 group-hover:scale-110 transition-transform shrink-0">
+                <div className="p-2 rounded-lg bg-sky-400/10 text-sky-400 group-hover:scale-110 transition-transform shrink-0">
                   <Mail size={15} />
                 </div>
                 <div className="min-w-0">
                   <p className="text-[10px] text-neutral-400 uppercase font-semibold">Email Address</p>
-                  <p className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 truncate">
+                  <p className="text-xs sm:text-sm font-bold text-white group-hover:text-sky-300 truncate">
                     vivekpandey.iimt@gmail.com
                   </p>
                 </div>
@@ -296,7 +296,7 @@ const ContactSection = () => {
           {/* Animated Pipeline Flow GIF */}
           <div className="rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-950/90 p-3 shadow-xl flex flex-col items-center justify-center">
             <div className="flex items-center gap-1.5 self-start mb-2 px-1 text-xs font-semibold text-neutral-400">
-              <Activity size={13} className="text-amber-400" />
+              <Activity size={13} className="text-sky-400" />
             </div>
             <img
               src={pipelineGifUrl}

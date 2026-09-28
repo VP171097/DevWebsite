@@ -45,7 +45,7 @@ const NoteCard = ({ note, categoryTitle }) => {
   const pdfUrl = getPdfUrl(note.pdfFile);
 
   return (
-    <article className="rounded-2xl bg-neutral-950/90 border border-neutral-800 hover:border-amber-400/50 transition-all duration-300 p-6 sm:p-7 shadow-2xl flex flex-col justify-between group">
+    <article className="rounded-2xl bg-neutral-950/90 border border-neutral-800 hover:border-sky-400/50 transition-all duration-300 p-6 sm:p-7 shadow-2xl flex flex-col justify-between group">
       <div>
         {/* Top Badges */}
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-neutral-800/80">
@@ -54,7 +54,7 @@ const NoteCard = ({ note, categoryTitle }) => {
               className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${note.difficulty === "Expert"
                 ? "bg-red-500/15 text-red-300 border-red-500/40"
                 : note.difficulty === "Advanced"
-                  ? "bg-amber-500/15 text-amber-300 border-amber-500/40"
+                  ? "bg-sky-500/15 text-sky-300 border-sky-500/40"
                   : "bg-emerald-500/15 text-emerald-300 border-emerald-500/40"
                 }`}
             >
@@ -73,7 +73,7 @@ const NoteCard = ({ note, categoryTitle }) => {
         </div>
 
         {/* Note Topic Title */}
-        <h3 className="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-amber-300 transition-colors">
+        <h3 className="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-sky-300 transition-colors">
           {note.topic || note.title}
         </h3>
 
@@ -85,7 +85,7 @@ const NoteCard = ({ note, categoryTitle }) => {
                 key={idx}
                 className="inline-flex items-center gap-1 text-[10px] text-neutral-400 bg-neutral-900 px-2 py-0.5 rounded border border-neutral-800"
               >
-                <Tag size={10} className="text-amber-400/70" />
+                <Tag size={10} className="text-sky-400/70" />
                 <span>{tag}</span>
               </span>
             ))}
@@ -100,7 +100,7 @@ const NoteCard = ({ note, categoryTitle }) => {
 
       {/* Card Action Footer */}
       <div className="pt-4 border-t border-neutral-800/80 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-1.5 text-xs text-amber-400 font-medium">
+        <div className="flex items-center gap-1.5 text-xs text-sky-400 font-medium">
           <FileText size={14} />
           <span>PDF Notes Document</span>
         </div>
@@ -110,7 +110,7 @@ const NoteCard = ({ note, categoryTitle }) => {
           href={pdfUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold shadow-md shadow-amber-500/20 transition-all hover:scale-105 cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-black text-xs font-bold shadow-md shadow-sky-500/20 transition-all hover:scale-105 cursor-pointer"
         >
           <FileText size={14} />
           <span>Open PDF</span>
@@ -170,7 +170,7 @@ const NotesPage = () => {
   const homeUrl = import.meta.env.BASE_URL;
 
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-white selection:bg-amber-400 selection:text-black">
+    <div className="relative min-h-screen bg-[#09090b] text-white selection:bg-sky-400 selection:text-black">
       {/* Background Particles */}
       <Particles
         className="fixed inset-0 w-full h-full -z-10"
@@ -192,8 +192,8 @@ const NotesPage = () => {
             </a>
 
             <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-neutral-800">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
-              <span className="text-amber-400 font-extrabold text-sm tracking-wider">
+              <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+              <span className="text-sky-400 font-extrabold text-sm tracking-wider">
                 DATA ENGINEERING KNOWLEDGE HUB
               </span>
             </div>
@@ -204,7 +204,7 @@ const NotesPage = () => {
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="p-2 rounded-lg bg-neutral-900 border border-neutral-800 text-amber-400 hover:bg-neutral-800 transition cursor-pointer"
+              className="p-2 rounded-lg bg-neutral-900 border border-neutral-800 text-sky-400 hover:bg-neutral-800 transition cursor-pointer"
             >
               {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
             </button>
@@ -216,13 +216,13 @@ const NotesPage = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-8 py-10">
         {/* Hero Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-400/10 border border-sky-400/30 text-sky-300 text-xs font-semibold mb-3">
             <BookOpen size={14} />
             <span>PDF Notes &amp; Production Guides</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black text-white mb-3 tracking-tight">
-            Data Engineering <span className="bg-gradient-to-r from-amber-300 to-yellow-500 bg-clip-text text-transparent">Notes</span>
+            Data Engineering <span className="bg-gradient-to-r from-sky-300 to-sky-500 bg-clip-text text-transparent">Notes</span>
           </h1>
 
           <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed">
@@ -240,7 +240,7 @@ const NotesPage = () => {
               placeholder="Search notes by topic or keyword (e.g. PySpark, Delta, SQL, Kafka)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 rounded-2xl bg-neutral-900/90 border border-neutral-700 focus:border-amber-400 text-white text-xs sm:text-sm placeholder-neutral-500 focus:outline-none shadow-xl transition"
+              className="w-full pl-11 pr-4 py-2.5 rounded-2xl bg-neutral-900/90 border border-neutral-700 focus:border-sky-400 text-white text-xs sm:text-sm placeholder-neutral-500 focus:outline-none shadow-xl transition"
             />
           </div>
         </div>
@@ -250,7 +250,7 @@ const NotesPage = () => {
           <button
             onClick={() => setActiveCategory("all")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5 ${activeCategory === "all"
-              ? "bg-amber-400 text-black shadow-lg shadow-amber-400/20 scale-105"
+              ? "bg-sky-400 text-black shadow-lg shadow-sky-400/20 scale-105"
               : "bg-neutral-900 text-neutral-300 border border-neutral-800 hover:border-neutral-600 hover:text-white"
               }`}
           >
@@ -268,7 +268,7 @@ const NotesPage = () => {
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5 ${isSelected
-                  ? "bg-amber-400 text-black shadow-lg shadow-amber-400/20 scale-105"
+                  ? "bg-sky-400 text-black shadow-lg shadow-sky-400/20 scale-105"
                   : "bg-neutral-900 text-neutral-300 border border-neutral-800 hover:border-neutral-600 hover:text-white"
                   }`}
               >

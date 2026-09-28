@@ -23,8 +23,8 @@ const ContactItem = ({ Icon, title, value, link }) => {
   return (
     <div className="group relative flex items-center justify-between gap-3 p-0.5 rounded-xl hover:bg-white/5 transition duration-200">
       <div className="flex items-center gap-3 min-w-0">
-        <div className="bg-[#141414] border border-neutral-800 p-2 rounded-xl shadow-md shrink-0 group-hover:border-amber-400/40 transition">
-          <Icon className="text-amber-400 w-3.5 h-3.5" />
+        <div className="bg-[#141414] border border-neutral-800 p-2 rounded-xl shadow-md shrink-0 group-hover:border-sky-400/40 transition">
+          <Icon className="text-sky-400 w-3.5 h-3.5" />
         </div>
         <div className="min-w-0 flex-1">
           <p className="text-[10px] text-gray-400 font-semibold tracking-wider uppercase">
@@ -35,7 +35,7 @@ const ContactItem = ({ Icon, title, value, link }) => {
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs md:text-sm font-medium text-white hover:text-amber-300 transition truncate block"
+              className="text-xs md:text-sm font-medium text-white hover:text-sky-300 transition truncate block"
               title={value}
             >
               {value}
@@ -43,7 +43,7 @@ const ContactItem = ({ Icon, title, value, link }) => {
           ) : (
             <p
               onClick={handleCopy}
-              className="text-xs md:text-sm font-medium text-white truncate cursor-pointer hover:text-amber-300 transition"
+              className="text-xs md:text-sm font-medium text-white truncate cursor-pointer hover:text-sky-300 transition"
               title="Click to copy"
             >
               {value}
@@ -57,7 +57,7 @@ const ContactItem = ({ Icon, title, value, link }) => {
         onClick={copyToClipboard}
         type="button"
         title="Copy to clipboard"
-        className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg bg-neutral-800/80 hover:bg-amber-400 hover:text-black text-neutral-300 shrink-0 cursor-pointer"
+        className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg bg-neutral-800/80 hover:bg-sky-400 hover:text-black text-neutral-300 shrink-0 cursor-pointer"
       >
         {copied ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
       </button>

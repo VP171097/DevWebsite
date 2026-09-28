@@ -11,10 +11,14 @@ import { useConfig } from "@/context/ConfigContext";
 import Header from "@/components/layouts/header";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import NotesPage from "./pages/NotesPage";
+import CinematicBackground from "@/components/ui/CinematicBackground";
+import CustomCursor from "@/components/ui/CustomCursor";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
 const App = () => {
   const [showDelayFinished, setShowDelayFinished] = useState(false);
   const { loading: configLoading } = useConfig();
+  const reducedMotion = usePrefersReducedMotion();
 
   // Check if current route is the standalone DE Notes page
   const isNotesRoute = () => {
@@ -38,7 +42,7 @@ const App = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowDelayFinished(true);
-    }, 1500);
+    }, 600);
     return () => clearTimeout(timer);
   }, []);
 
@@ -59,18 +63,33 @@ const App = () => {
 
   return (
     <div className="relative">
-      <Particles
-        className="fixed inset-0 -z-10"
-        quantity={200}
-        ease={50}
-        refresh
-      />
-      <ScrollProgress className="top-0 z-20" />
+      {/* Cinematic ambient backdrop (CSS only) */}
+      <CinematicBackground />
 
-      {/* Sticky Header at top for all screens */}
-      <div className="sticky top-0 z-50">
-        <Header />
-      </div>
+      {/* Sparse data particles — skipped for reduced-motion visitors */}
+      {!reducedMotion && (
+        <Particles
+          className="fixed inset-0 -z-10"
+          quantity={60}
+          ease={60}
+          color="#38bdf8"
+          refresh
+        />
+      )}
+
+      <ScrollProgress />
+      <CustomCursor />
+
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-sky-500 focus:text-slate-950 focus:font-bold"
+      >
+        Skip to content
+      </a>
+
+      <Header />
+
+      <main id="main-content">
 
       <LandingPage />
 
@@ -83,9 +102,10 @@ const App = () => {
         </div>
       </section>
 
-      <section id="contact" className="flex justify-between flex-col mb-5">
-        <ContactSection />
-      </section>
+        <section id="contact" className="flex justify-between flex-col mb-5 scroll-mt-24">
+          <ContactSection />
+        </section>
+      </main>
 
       <footer>
         <Footer />

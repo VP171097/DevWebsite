@@ -14,38 +14,38 @@ const Education = () => {
     <div id="education" className="text-white scroll-mt-24">
       <MagicCard
         gradientSize={400}
-        gradientFrom="#4a16f4"
-        gradientTo="#f42116"
-        className="rounded-2xl xl:border-2 xl:p-8 py-6 px-4"
+        gradientFrom="#0ea5e9"
+        gradientTo="#22d3ee"
+        className="rounded-2xl glass xl:p-8 py-6 px-4"
       >
         {/* Header */}
         <div className="flex items-center mb-6 px-1">
-          <div className="bg-yellow-400 p-2 rounded-md mr-4 shadow-md shadow-yellow-500/20">
+          <div className="bg-sky-400 p-2 rounded-md mr-4 shadow-md shadow-sky-500/20">
             <GraduationCap size={22} className="text-black" />
           </div>
           <div>
             <h2 className="text-2xl font-bold">
               {educationConfig.title || "Education & Academic Background"}
             </h2>
-            <div className="bg-yellow-400 w-16 h-1 rounded-sm mt-1"></div>
+            <div className="bg-sky-400 w-16 h-1 rounded-sm mt-1"></div>
           </div>
         </div>
 
         {/* Timeline Container */}
-        <div className="relative ml-3 sm:ml-5 border-l-2 border-amber-500/40 pl-6 sm:pl-8 space-y-8">
+        <div className="relative ml-3 sm:ml-5 border-l-2 border-sky-500/40 pl-6 sm:pl-8 space-y-8">
           {educationConfig.educationData?.map((item, index) => (
             <div key={index} className="relative group">
               {/* Timeline Bullet Node */}
               <span className="absolute -left-[31px] sm:-left-[39px] top-1.5 flex h-4 w-4">
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-amber-400 border-2 border-black shadow"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-sky-400 border-2 border-black shadow"></span>
               </span>
 
               {/* Degree Title */}
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-amber-300 transition">
+                <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-sky-300 transition">
                   {item.degree || item.school}
                 </h3>
-                <span className="text-xs text-amber-300 font-bold px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30">
+                <span className="text-xs text-sky-300 font-bold px-2.5 py-0.5 rounded-full bg-sky-500/15 border border-sky-500/30">
                   {item.year}
                 </span>
               </div>
@@ -68,7 +68,7 @@ const Education = () => {
                     {item.school}
                   </p>
                   {item.grade && (
-                    <p className="text-xs text-amber-400/90 font-medium mt-0.5">
+                    <p className="text-xs text-sky-400/90 font-medium mt-0.5">
                       Grade: {item.grade}
                     </p>
                   )}

@@ -50,7 +50,7 @@ const ScrollToTop = () => {
         onClick={scrollToTop}
         type="button"
         aria-label="Scroll to top of page"
-        className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-neutral-950/90 text-amber-400 border border-neutral-800 shadow-xl shadow-amber-500/10 hover:border-amber-400 hover:shadow-amber-500/25 transition-all duration-300 cursor-pointer backdrop-blur-md hover:scale-105 active:scale-95"
+        className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-neutral-950/90 text-sky-400 border border-neutral-800 shadow-xl shadow-sky-500/10 hover:border-sky-400 hover:shadow-sky-500/25 transition-all duration-300 cursor-pointer backdrop-blur-md hover:scale-105 active:scale-95"
       >
         {/* SVG Progress Ring */}
         <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 44 44">
@@ -66,7 +66,7 @@ const ScrollToTop = () => {
             cx="22"
             cy="22"
             r={radius}
-            className="stroke-amber-400 transition-all duration-150"
+            className="stroke-sky-400 transition-all duration-150"
             strokeWidth="3"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}

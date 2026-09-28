@@ -79,19 +79,19 @@ const Sidebar = () => {
     sidebarConfig.noticePeriod?.active && remainingNoticeDays > 0;
 
   return (
-    <aside className="relative container md:w-80 bg-neutral-950/80 backdrop-blur-xl border border-neutral-800 text-white py-4 px-4 rounded-2xl shadow-xl flex flex-col justify-between lg:sticky lg:top-[90px] h-min mb-6 mt-6 md:mb-10 md:mt-10">
+    <aside className="relative container md:w-80 glass text-white py-4 px-4 rounded-2xl shadow-xl flex flex-col justify-between lg:sticky lg:top-[90px] h-min mb-6 mt-6 md:mb-10 md:mt-10">
       <BorderBeam
         size={500}
         borderWidth={2}
         duration={4}
-        className="hidden sm:block absolute xl:via-amber-500"
+        className="hidden sm:block absolute xl:via-sky-500"
       />
 
       <div className="flex flex-col items-center py-1 md:py-2 px-1">
         {/* Avatar with Glowing Pulse */}
         <div className="relative mb-2">
           <img
-            className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-neutral-900 object-cover shadow-md shadow-amber-500/10 border border-neutral-700"
+            className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-neutral-900 object-cover shadow-md shadow-sky-500/10 border border-neutral-700"
             src={sidebarConfig.avatar}
             alt="Avatar"
             loading="lazy"
@@ -120,8 +120,8 @@ const Sidebar = () => {
 
         {/* Dynamic Serving Notice Period Countdown Pill */}
         {showNoticePeriod && (
-          <div className="mt-1.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 text-[11px] font-bold tracking-wide shadow-sm animate-pulse">
-            <Clock size={12} className="text-amber-400" />
+          <div className="mt-1.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/15 border border-sky-500/40 text-sky-300 text-[11px] font-bold tracking-wide shadow-sm animate-pulse">
+            <Clock size={12} className="text-sky-400" />
             <span>Serving Notice: {remainingNoticeDays} Days Left</span>
           </div>
         )}
@@ -157,27 +157,27 @@ const Sidebar = () => {
               className="group flex items-center justify-between gap-3 w-full px-1 py-0.5 mb-2"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="bg-[#141414] border border-neutral-800 p-2 rounded-xl shadow-md shrink-0 group-hover:border-amber-400/40 transition">
-                  <FaGithub className="text-amber-400 w-3.5 h-3.5" />
+                <div className="bg-[#141414] border border-neutral-800 p-2 rounded-xl shadow-md shrink-0 group-hover:border-sky-400/40 transition">
+                  <FaGithub className="text-sky-400 w-3.5 h-3.5" />
                 </div>
                 <div className="min-w-0">
                   <p className="text-[10px] text-gray-400 font-semibold tracking-wider uppercase">
                     GitHub
                   </p>
-                  <p className="text-xs md:text-sm font-medium text-white group-hover:text-amber-300 transition truncate">
+                  <p className="text-xs md:text-sm font-medium text-white group-hover:text-sky-300 transition truncate">
                     @{githubUsername}
                   </p>
                 </div>
               </div>
               <ExternalLink
                 size={13}
-                className="text-neutral-500 group-hover:text-amber-300 transition shrink-0"
+                className="text-neutral-500 group-hover:text-sky-300 transition shrink-0"
               />
             </a>
 
             <div className="grid grid-cols-3 gap-1.5 w-full px-1 text-center">
               <div className="p-1.5 rounded-xl bg-neutral-900/80 border border-neutral-800">
-                <div className="flex items-center justify-center gap-1 text-amber-400 font-black text-sm">
+                <div className="flex items-center justify-center gap-1 text-sky-400 font-black text-sm">
                   <BookOpen size={12} />
                   <span>{githubStats.publicRepos ?? "—"}</span>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { useConfig } from "@/context/ConfigContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -8,52 +8,66 @@ const Header = () => {
   const { config, loading } = useConfig();
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  if (loading || !config.navigation) {
-    return null;
-  }
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (loading || !config.navigation) return null;
 
   const navItems = config.navigation.navItems;
+  const resumeLink = config.landing?.resumeLink || "/resume.pdf";
+
+  const shell = scrolled
+    ? "glass-strong border-b border-white/10 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.9)]"
+    : "bg-transparent border-b border-transparent";
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-black/85 backdrop-blur-xl border-b border-neutral-800 shadow-2xl transition-colors">
-      {/* ===== Mobile / Tablet View Header ===== */}
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${shell}`}
+    >
+      {/* ===== Mobile / Tablet ===== */}
       <div className="xl:hidden px-4 sm:px-6 py-3 flex justify-between items-center">
         <Link
           to="landing"
-          smooth={true}
-          duration={500}
-          className="text-amber-400 font-extrabold text-base sm:text-lg tracking-wider cursor-pointer flex items-center gap-1.5"
+          smooth
+          duration={600}
+          className="text-white font-bold text-sm sm:text-base tracking-[0.18em] uppercase cursor-pointer flex items-center gap-2"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
-          <span>{config.sidebar?.name || "VIVEK PANDEY"}</span>
+          <span className="w-2 h-2 rounded-full bg-sky-400" />
+          <span>{config.sidebar?.name || "Vivek Pandey"}</span>
         </Link>
 
         <div className="flex items-center gap-2">
-          {/* Theme Switcher */}
           <button
             onClick={toggleTheme}
-            aria-label="Toggle Theme"
-            className="p-2 rounded-lg bg-neutral-900 border border-neutral-700 text-amber-400 hover:bg-neutral-800 transition"
-            title={`Current Theme: ${theme}`}
+            aria-label="Toggle theme"
+            className="btn-cine p-2 rounded-lg glass text-sky-300"
+            title={`Current theme: ${theme}`}
           >
             {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
           </button>
 
-          {/* Mobile Drawer Toggle */}
           <button
-            className="text-white p-2 rounded-lg bg-neutral-900 border border-neutral-700 hover:bg-neutral-800 transition"
+            className="btn-cine text-white p-2 rounded-lg glass"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle Navigation Menu"
+            aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
       {isOpen && (
-        <div className="xl:hidden px-5 py-4 flex flex-col gap-1.5 border-t border-neutral-800 bg-neutral-950/98 backdrop-blur-2xl shadow-2xl animate-in slide-in-from-top duration-200">
+        <nav
+          aria-label="Mobile"
+          className="xl:hidden px-5 py-4 flex flex-col gap-1.5 border-t border-white/10 glass-strong"
+        >
           {navItems.map((item, index) =>
             item.isNewTab ? (
               <a
@@ -62,7 +76,7 @@ const Header = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="text-sm px-4 py-2.5 rounded-lg transition font-medium text-gray-300 hover:bg-neutral-800 hover:text-white"
+                className="text-sm px-4 py-2.5 rounded-lg transition font-medium text-neutral-300 hover:bg-white/5 hover:text-white"
               >
                 {item.label}
               </a>
@@ -70,49 +84,47 @@ const Header = () => {
               <Link
                 key={index}
                 to={item.to}
-                smooth={true}
-                duration={500}
+                smooth
+                duration={600}
                 offset={-70}
-                spy={true}
+                spy
                 activeClass="active"
                 onClick={() => setIsOpen(false)}
-                className="text-sm px-4 py-2.5 rounded-lg cursor-pointer transition font-medium text-gray-300 hover:bg-neutral-800 hover:text-white"
+                className="text-sm px-4 py-2.5 rounded-lg cursor-pointer transition font-medium text-neutral-300 hover:bg-white/5 hover:text-white"
               >
                 {item.label}
               </Link>
             )
           )}
 
-          {/* Quick Resume CTA inside Mobile Menu */}
-          <div className="pt-3 mt-2 border-t border-neutral-800 flex gap-2">
+          <div className="pt-3 mt-2 border-t border-white/10">
             <a
-              href="/resume.pdf"
+              href={resumeLink}
+              download="Vivek_Pandey_Senior_Data_Engineer.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-amber-500 text-black font-bold text-xs shadow-md"
+              className="btn-cine w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-sky-500 text-slate-950 font-bold text-xs"
             >
               <Download size={14} />
               <span>Resume (PDF)</span>
             </a>
           </div>
-        </div>
+        </nav>
       )}
 
-      {/* ===== Desktop View Header ===== */}
-      <div className="hidden xl:flex max-w-7xl mx-auto justify-between items-center px-6 py-2.5">
-        {/* Left Brand */}
+      {/* ===== Desktop ===== */}
+      <div className="hidden xl:flex max-w-7xl mx-auto justify-between items-center px-6 py-3">
         <Link
           to="landing"
-          smooth={true}
-          duration={500}
-          className="text-amber-400 font-extrabold text-base tracking-wider cursor-pointer flex items-center gap-2 hover:scale-105 transition-transform shrink-0"
+          smooth
+          duration={600}
+          className="btn-cine text-white font-bold text-sm tracking-[0.2em] uppercase cursor-pointer flex items-center gap-2 shrink-0"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
-          <span>{config.sidebar?.name || "VIVEK PANDEY"}</span>
+          <span className="w-2 h-2 rounded-full bg-sky-400" />
+          <span>{config.sidebar?.name || "Vivek Pandey"}</span>
         </Link>
 
-        {/* Center Main Nav Items */}
-        <nav className="flex items-center gap-1 bg-neutral-950/80 px-2 py-1 rounded-xl border border-neutral-800">
+        <nav aria-label="Primary" className="flex items-center gap-0.5">
           {navItems.map((item, index) =>
             item.isNewTab ? (
               <a
@@ -120,7 +132,7 @@ const Header = () => {
                 href={`${import.meta.env.BASE_URL}${item.path || "?page=notes"}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1.5 text-xs lg:text-sm transition-all duration-150 rounded-lg font-medium text-gray-300 hover:bg-neutral-800 hover:text-white whitespace-nowrap cursor-pointer"
+                className="px-3 py-1.5 text-sm rounded-lg font-medium text-neutral-400 hover:text-white hover:bg-white/5 transition-colors duration-200 whitespace-nowrap"
               >
                 {item.label}
               </a>
@@ -128,12 +140,12 @@ const Header = () => {
               <Link
                 key={index}
                 to={item.to}
-                smooth={true}
-                duration={500}
+                smooth
+                duration={600}
                 offset={-80}
-                spy={true}
+                spy
                 activeClass="active"
-                className="px-3 py-1.5 text-xs lg:text-sm transition-all duration-150 cursor-pointer rounded-lg font-medium text-gray-300 hover:bg-neutral-800 hover:text-white whitespace-nowrap"
+                className="px-3 py-1.5 text-sm rounded-lg font-medium text-neutral-400 hover:text-white hover:bg-white/5 transition-colors duration-200 cursor-pointer whitespace-nowrap"
               >
                 {item.label}
               </Link>
@@ -141,35 +153,32 @@ const Header = () => {
           )}
         </nav>
 
-        {/* Right Actions */}
         <div className="flex items-center gap-2 shrink-0">
-          {/* Theme Switcher */}
           <button
             onClick={toggleTheme}
-            aria-label="Toggle Theme"
-            className="p-2 rounded-lg bg-neutral-900 border border-neutral-800 text-amber-400 hover:bg-neutral-800 transition cursor-pointer"
-            title={`Toggle Theme (Current: ${theme})`}
+            aria-label="Toggle theme"
+            className="btn-cine p-2 rounded-lg glass text-sky-300"
+            title={`Toggle theme (current: ${theme})`}
           >
             {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
           </button>
 
-          {/* GitHub Profile */}
           <a
             href="https://github.com/VP171097"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-lg bg-neutral-900 border border-neutral-800 text-gray-300 hover:text-white hover:bg-neutral-800 transition"
-            aria-label="GitHub Profile"
+            className="btn-cine p-2 rounded-lg glass text-neutral-300 hover:text-white"
+            aria-label="GitHub profile"
           >
             <Github size={15} />
           </a>
 
-          {/* Resume CTA */}
           <a
-            href="/resume.pdf"
+            href={resumeLink}
+            download="Vivek_Pandey_Senior_Data_Engineer.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold shadow-md shadow-amber-500/20 transition hover:scale-105"
+            className="btn-cine inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-bold shadow-md shadow-sky-500/20"
           >
             <Download size={13} />
             <span>Resume</span>

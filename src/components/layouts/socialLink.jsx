@@ -25,7 +25,7 @@ const SocialLinks = () => {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl text-gray-400 hover:text-amber-400 hover:bg-neutral-800/80 transition-all duration-200 hover:scale-110 flex items-center justify-center"
+            className="p-2.5 rounded-xl text-gray-400 hover:text-sky-400 hover:bg-neutral-800/80 transition-all duration-200 hover:scale-110 flex items-center justify-center"
             aria-label={item.label}
           >
             <IconComponent size={22} />

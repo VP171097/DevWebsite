@@ -6,6 +6,7 @@ import Experience from "../pages/Experience";
 import Education from "../pages/Education";
 import Achievements from "../pages/Achievements";
 import Testimonials from "../pages/Testimonials";
+import Architecture from "../pages/Architecture";
 
 const HeroSection = () => {
   return (
@@ -20,7 +21,12 @@ const HeroSection = () => {
         <Experience />
       </div>
 
-      {/* 3. Education Background */}
+      {/* 3. How I Build Data — reference architecture */}
+      <div className="xl:px-4">
+        <Architecture />
+      </div>
+
+      {/* 4. Education Background */}
       <div id="education" className="xl:px-4 scroll-mt-24">
         <Education />
       </div>

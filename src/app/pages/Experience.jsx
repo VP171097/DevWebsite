@@ -1,7 +1,9 @@
-import React from "react";
-import { Briefcase, Download, Sparkles, CheckCircle2 } from "lucide-react";
-import { MagicCard } from "@/components/magicui/magic-card";
+import React, { useRef } from "react";
+import { motion, useScroll, useSpring } from "motion/react";
+import { Briefcase, Download, CheckCircle2 } from "lucide-react";
 import { useConfig } from "@/context/ConfigContext";
+import { Reveal } from "@/components/ui/Reveal";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
 const HIGHLIGHT_KEYWORDS = [
   "Databricks Lakehouse",
@@ -14,37 +16,38 @@ const HIGHLIGHT_KEYWORDS = [
   "Kafka",
   "Azure Data Lake",
   "Azure SQL Server",
+  "Azure Function Apps",
   "ETL",
   "AWS S3",
+  "Databricks",
   "Python",
 ];
 
 const renderHighlightedText = (text) => {
   let parts = [text];
   HIGHLIGHT_KEYWORDS.forEach((keyword) => {
-    const newParts = [];
+    const next = [];
     parts.forEach((part) => {
-      if (typeof part === "string") {
-        const split = part.split(new RegExp(`(${keyword})`, "gi"));
-        split.forEach((subPart) => {
-          if (subPart.toLowerCase() === keyword.toLowerCase()) {
-            newParts.push(
-              <span
-                key={Math.random()}
-                className="font-bold text-amber-300 bg-amber-400/10 px-1 py-0.5 rounded border border-amber-400/20"
-              >
-                {subPart}
-              </span>
-            );
-          } else {
-            newParts.push(subPart);
-          }
-        });
-      } else {
-        newParts.push(part);
+      if (typeof part !== "string") {
+        next.push(part);
+        return;
       }
+      part.split(new RegExp(`(${keyword})`, "gi")).forEach((sub, i) => {
+        if (sub.toLowerCase() === keyword.toLowerCase()) {
+          next.push(
+            <span
+              key={`${keyword}-${i}-${next.length}`}
+              className="font-semibold text-sky-300"
+            >
+              {sub}
+            </span>
+          );
+        } else if (sub) {
+          next.push(sub);
+        }
+      });
     });
-    parts = newParts;
+    parts = next;
   });
   return parts;
 };
@@ -52,105 +55,122 @@ const renderHighlightedText = (text) => {
 const Experience = () => {
   const { config, loading } = useConfig();
   const experienceConfig = config.experience;
+  const reduced = usePrefersReducedMotion();
+  const timelineRef = useRef(null);
 
-  if (loading || !experienceConfig)
-    return <div className="text-white text-center py-6">Loading Experience...</div>;
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 75%", "end 60%"],
+  });
+  const lineScale = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  if (loading || !experienceConfig) {
+    return <div className="text-white text-center py-6">Loading Experience…</div>;
+  }
+
+  const resumeLink = config.landing?.resumeLink || "/resume.pdf";
 
   return (
-    <div id="experience" className="text-white scroll-mt-24">
-      <MagicCard
-        gradientSize={400}
-        gradientFrom="#4a16f4"
-        gradientTo="#f42116"
-        className="rounded-2xl xl:border-2 xl:p-8 py-6 px-4"
-      >
+    <section
+      id="experience"
+      className="text-white scroll-mt-24"
+      aria-labelledby="experience-heading"
+    >
+      <div className="glass rounded-2xl px-4 py-7 xl:px-8 xl:py-9">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6 px-1">
-          <div className="flex items-center">
-            <div className="bg-yellow-400 p-2 rounded-md mr-4 shadow-md shadow-yellow-500/20">
-              <Briefcase size={22} className="text-black" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold">
-                {experienceConfig.title || "Career Experience"}
+        <Reveal className="flex flex-wrap items-end justify-between gap-4 mb-8">
+          <div>
+            <p className="eyebrow">Career</p>
+            <div className="flex items-center gap-3 mt-3">
+              <div className="bg-sky-400 p-2 rounded-md shadow-md shadow-sky-500/20">
+                <Briefcase size={20} className="text-slate-950" />
+              </div>
+              <h2 id="experience-heading" className="text-2xl font-bold">
+                {experienceConfig.title || "Experience"}
               </h2>
-              <div className="bg-yellow-400 w-16 h-1 rounded-sm mt-1"></div>
             </div>
           </div>
 
           <a
-            href="/resume.pdf"
+            href={resumeLink}
+            download="Vivek_Pandey_Senior_Data_Engineer.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold shadow-md shadow-amber-500/20 transition hover:scale-105"
+            className="btn-cine hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg glass text-sky-300 text-xs font-semibold"
           >
             <Download size={14} />
             <span>Download Resume</span>
           </a>
-        </div>
+        </Reveal>
 
-        {/* Timeline Container */}
-        <div className="relative ml-3 sm:ml-5 border-l-2 border-amber-500/40 pl-6 sm:pl-8 space-y-10">
+        {/* Timeline */}
+        <div ref={timelineRef} className="relative ml-2 sm:ml-4 pl-6 sm:pl-9 space-y-10">
+          {/* Track + progressively drawn accent line */}
+          <div className="absolute left-0 top-1 bottom-1 w-px bg-white/10" aria-hidden="true" />
+          <motion.div
+            aria-hidden="true"
+            className="absolute left-0 top-1 bottom-1 w-px origin-top bg-gradient-to-b from-sky-400 via-sky-500 to-transparent"
+            style={reduced ? { scaleY: 1 } : { scaleY: lineScale }}
+          />
+
           {experienceConfig.experienceData.map((item, index) => (
-            <div key={index} className="relative group">
-              {/* Timeline Bullet Node with Glowing Pulse */}
-              <span className="absolute -left-[31px] sm:-left-[39px] top-1.5 flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60"></span>
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-amber-400 border-2 border-black shadow"></span>
+            <Reveal key={index} delay={index * 0.05} className="relative group">
+              {/* Node */}
+              <span
+                aria-hidden="true"
+                className="absolute -left-[30px] sm:-left-[42px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-slate-950 border border-sky-400/60 ring-4 ring-sky-500/10 transition-transform duration-300 group-hover:scale-125"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
               </span>
 
-              {/* Role Title & Duration */}
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="text-lg md:text-xl font-black text-white group-hover:text-amber-300 transition">
-                  {item.title}
-                </h3>
-                <span className="text-xs text-amber-300 font-bold px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30">
-                  {item.duration}
-                </span>
-              </div>
+              <div className="card-cine rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-sky-200 transition-colors">
+                    {item.title}
+                  </h3>
+                  <span className="text-[11px] font-semibold text-sky-300 px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/25">
+                    {item.duration}
+                  </span>
+                </div>
 
-              {/* Company Banner */}
-              <div className="flex flex-wrap sm:flex-nowrap gap-3.5 mt-2.5 items-center">
-                {item.img && (
-                  <img
-                    src={item.img}
-                    className="w-24 sm:w-28 h-9 sm:h-10 object-contain bg-white/5 border border-white/10 rounded-lg p-1.5"
-                    alt={`${item.company} logo`}
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                    }}
-                  />
-                )}
-                <div className="border-l border-neutral-700 pl-3">
-                  <p className="text-xs sm:text-sm font-semibold text-neutral-200">
+                <div className="flex flex-wrap sm:flex-nowrap gap-3.5 mt-3 items-center">
+                  {item.img && (
+                    <img
+                      src={item.img}
+                      className="w-24 sm:w-28 h-9 sm:h-10 object-contain bg-white/5 border border-white/10 rounded-lg p-1.5"
+                      alt={`${item.company} logo`}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
+                    />
+                  )}
+                  <p className="text-xs sm:text-sm font-medium text-neutral-300 border-l border-white/10 pl-3">
                     {item.company}
                   </p>
                 </div>
-              </div>
 
-              {/* Points List */}
-              <div className="mt-4">
-                <ul className="space-y-2.5">
+                <ul className="mt-4 space-y-2.5">
                   {item.points.map((point, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2 text-xs md:text-sm text-neutral-300 leading-relaxed"
+                      className="flex items-start gap-2 text-xs md:text-sm text-neutral-400 leading-relaxed"
                     >
-                      <CheckCircle2
-                        size={15}
-                        className="text-amber-400 shrink-0 mt-0.5"
-                      />
+                      <CheckCircle2 size={14} className="text-sky-400/80 shrink-0 mt-0.5" />
                       <span>{renderHighlightedText(point)}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
-      </MagicCard>
-    </div>
+      </div>
+    </section>
   );
 };
 
