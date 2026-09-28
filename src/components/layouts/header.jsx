@@ -100,6 +100,7 @@ const Header = () => {
           <div className="pt-3 mt-2 border-t border-white/10">
             <a
               href={resumeLink}
+              download="Vivek_Pandey_Senior_Data_Engineer.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-cine w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-sky-500 text-slate-950 font-bold text-xs"
@@ -174,6 +175,7 @@ const Header = () => {
 
           <a
             href={resumeLink}
+            download="Vivek_Pandey_Senior_Data_Engineer.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-cine inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-bold shadow-md shadow-sky-500/20"

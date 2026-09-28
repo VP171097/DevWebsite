@@ -97,6 +97,7 @@ const Experience = () => {
 
           <a
             href={resumeLink}
+            download="Vivek_Pandey_Senior_Data_Engineer.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-cine hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg glass text-sky-300 text-xs font-semibold"

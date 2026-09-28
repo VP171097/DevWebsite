@@ -1,11 +1,11 @@
 # ⚡ Vivek Pandey — Interactive Developer & Data Engineer Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-vp171097.github.io%2FPortfolio-FFB800?style=for-the-badge&logo=googlechrome&logoColor=black)](https://vp171097.github.io/Portfolio/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-vp171097.github.io%2FDevWebsite-FFB800?style=for-the-badge&logo=googlechrome&logoColor=black)](https://vp171097.github.io/DevWebsite/)
 [![React 19](https://img.shields.io/badge/React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite%207-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Web3Forms](https://img.shields.io/badge/Web3Forms-Contact_API-059669?style=for-the-badge&logo=fastapi&logoColor=white)](https://web3forms.com/)
-[![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/VP171097/Portfolio/actions)
+[![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/VP171097/DevWebsite/actions)
 
 A high-performance, responsive, and glassmorphic developer portfolio built for **Vivek Pandey** (Senior Associate Consultant & Data Engineer at Infosys). Engineered with a **100% dynamic JSON configuration engine**, custom 3D micro-interactions, particle canvas background, and automated CI/CD deployment.
 
@@ -142,7 +142,7 @@ You can customize the entire portfolio by editing files in [`public/config/`](./
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/VP171097/Portfolio.git
+git clone https://github.com/VP171097/DevWebsite.git
 cd Portfolio
 ```
 
@@ -195,7 +195,7 @@ This project uses **GitHub Actions** for automated continuous integration and co
 
 **Vivek Pandey**  
 Senior Associate Consultant & Data Engineer  
-- 🌐 **Portfolio**: [vp171097.github.io/Portfolio](https://vp171097.github.io/Portfolio/)  
+- 🌐 **Portfolio**: [vp171097.github.io/DevWebsite](https://vp171097.github.io/DevWebsite/)  
 - 🐙 **GitHub**: [@VP171097](https://github.com/VP171097)  
 - 💼 **LinkedIn**: [linkedin.com/in/vp171097](https://www.linkedin.com/in/vp171097)  
 - 📧 **Email**: [vivekpandey.iimt@gmail.com](mailto:vivekpandey.iimt@gmail.com)  

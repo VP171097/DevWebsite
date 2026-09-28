@@ -123,6 +123,7 @@ const LandingPage = () => {
 
           <a
             href={landingConfig.resumeLink}
+            download="Vivek_Pandey_Senior_Data_Engineer.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-cine inline-flex items-center gap-2 px-6 py-3 rounded-xl glass text-white text-sm font-semibold hover:border-sky-400/50"
