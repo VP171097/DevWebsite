@@ -37,7 +37,7 @@ const renderHighlightedText = (text) => {
           next.push(
             <span
               key={`${keyword}-${i}-${next.length}`}
-              className="font-semibold text-sky-300"
+              className="font-semibold text-amber-300"
             >
               {sub}
             </span>
@@ -86,7 +86,7 @@ const Experience = () => {
           <div>
             <p className="eyebrow">Career</p>
             <div className="flex items-center gap-3 mt-3">
-              <div className="bg-sky-400 p-2 rounded-md shadow-md shadow-sky-500/20">
+              <div className="bg-amber-400 p-2 rounded-md shadow-md shadow-amber-500/20">
                 <Briefcase size={20} className="text-slate-950" />
               </div>
               <h2 id="experience-heading" className="text-2xl font-bold">
@@ -100,7 +100,7 @@ const Experience = () => {
             download="Vivek_Pandey_Senior_Data_Engineer.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-cine hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg glass text-sky-300 text-xs font-semibold"
+            className="btn-cine hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg glass text-amber-300 text-xs font-semibold"
           >
             <Download size={14} />
             <span>Download Resume</span>
@@ -113,7 +113,7 @@ const Experience = () => {
           <div className="absolute left-0 top-1 bottom-1 w-px bg-white/10" aria-hidden="true" />
           <motion.div
             aria-hidden="true"
-            className="absolute left-0 top-1 bottom-1 w-px origin-top bg-gradient-to-b from-sky-400 via-sky-500 to-transparent"
+            className="absolute left-0 top-1 bottom-1 w-px origin-top bg-gradient-to-b from-amber-400 via-amber-500 to-transparent"
             style={reduced ? { scaleY: 1 } : { scaleY: lineScale }}
           />
 
@@ -122,17 +122,17 @@ const Experience = () => {
               {/* Node */}
               <span
                 aria-hidden="true"
-                className="absolute -left-[30px] sm:-left-[42px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-slate-950 border border-sky-400/60 ring-4 ring-sky-500/10 transition-transform duration-300 group-hover:scale-125"
+                className="absolute -left-[30px] sm:-left-[42px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-slate-950 border border-amber-400/60 ring-4 ring-amber-500/10 transition-transform duration-300 group-hover:scale-125"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
               </span>
 
               <div className="card-cine rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-sky-200 transition-colors">
+                  <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-amber-200 transition-colors">
                     {item.title}
                   </h3>
-                  <span className="text-[11px] font-semibold text-sky-300 px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/25">
+                  <span className="text-[11px] font-semibold text-amber-300 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/25">
                     {item.duration}
                   </span>
                 </div>
@@ -160,7 +160,7 @@ const Experience = () => {
                       key={i}
                       className="flex items-start gap-2 text-xs md:text-sm text-neutral-400 leading-relaxed"
                     >
-                      <CheckCircle2 size={14} className="text-sky-400/80 shrink-0 mt-0.5" />
+                      <CheckCircle2 size={14} className="text-amber-400/80 shrink-0 mt-0.5" />
                       <span>{renderHighlightedText(point)}</span>
                     </li>
                   ))}

@@ -58,7 +58,7 @@ const About = () => {
               >
                 {aboutConfig.title}
               </h2>
-              <div className="bg-sky-400 w-14 h-[3px] rounded-sm mt-3" />
+              <div className="bg-amber-400 w-14 h-[3px] rounded-sm mt-3" />
             </Reveal>
 
             <Reveal delay={0.08} className="mt-5">
@@ -82,10 +82,10 @@ const About = () => {
                     <RevealItem key={idx}>
                       <div className="card-cine h-full rounded-xl border border-white/10 bg-white/[0.03] p-3.5 flex flex-col justify-between">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm sm:text-base font-bold text-sky-300 leading-tight">
+                          <span className="text-sm sm:text-base font-bold text-amber-300 leading-tight">
                             <CountUp value={stat.value} />
                           </span>
-                          <span className="card-icon p-1.5 rounded-lg bg-sky-400/10 text-sky-400">
+                          <span className="card-icon p-1.5 rounded-lg bg-amber-400/10 text-amber-400">
                             <Icon size={13} />
                           </span>
                         </div>
@@ -116,7 +116,7 @@ const About = () => {
             className="glass rounded-2xl p-5 relative overflow-hidden"
             aria-label="Data engineer profile"
           >
-            <div className="ambient-glow bg-sky-500/25 w-56 h-56 -top-24 -right-16" />
+            <div className="ambient-glow bg-amber-500/25 w-56 h-56 -top-24 -right-16" />
 
             <div className="relative flex items-center gap-4">
               {sidebarConfig?.avatar && (
@@ -125,9 +125,9 @@ const About = () => {
                     src={sidebarConfig.avatar}
                     alt={`${sidebarConfig.name} portrait`}
                     loading="lazy"
-                    className="w-16 h-16 rounded-2xl object-cover border border-white/15 shadow-lg shadow-sky-500/10 transition-transform duration-300 hover:scale-105"
+                    className="w-16 h-16 rounded-2xl object-cover border border-white/15 shadow-lg shadow-amber-500/10 transition-transform duration-300 hover:scale-105"
                   />
-                  <span className="absolute -inset-1 rounded-2xl ring-1 ring-sky-400/25 pointer-events-none" />
+                  <span className="absolute -inset-1 rounded-2xl ring-1 ring-amber-400/25 pointer-events-none" />
                 </div>
               )}
               <div className="min-w-0">
@@ -149,7 +149,7 @@ const About = () => {
               )}
               {location && (
                 <p className="flex items-center gap-2 text-[11px] text-neutral-400">
-                  <MapPin size={13} className="text-sky-400" />
+                  <MapPin size={13} className="text-amber-400" />
                   {location}
                 </p>
               )}
@@ -165,13 +165,13 @@ const About = () => {
                         <span className="text-neutral-200 font-medium">
                           {skill.name}
                         </span>
-                        <span className="text-sky-400 font-mono">
+                        <span className="text-amber-400 font-mono">
                           {skill.proficiency}%
                         </span>
                       </div>
                       <div className="h-1.5 w-full rounded-full bg-white/5 overflow-hidden">
                         <motion.div
-                          className="h-full rounded-full bg-gradient-to-r from-sky-500 to-cyan-300"
+                          className="h-full rounded-full bg-gradient-to-r from-amber-500 to-amber-300"
                           initial={reduced ? false : { width: 0 }}
                           whileInView={{ width: `${skill.proficiency}%` }}
                           viewport={{ once: true, amount: 0.6 }}

@@ -18,7 +18,7 @@ export const ScrollProgress = React.forwardRef(({ className, ...props }, ref) =>
       ref={ref}
       aria-hidden="true"
       className={cn(
-        "fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-sky-500 via-sky-400 to-cyan-300",
+        "fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-amber-500 via-amber-400 to-amber-300",
         className
       )}
       style={{ scaleX }}

@@ -38,7 +38,7 @@ const Header = () => {
           duration={600}
           className="text-white font-bold text-sm sm:text-base tracking-[0.18em] uppercase cursor-pointer flex items-center gap-2"
         >
-          <span className="w-2 h-2 rounded-full bg-sky-400" />
+          <span className="w-2 h-2 rounded-full bg-amber-400" />
           <span>{config.sidebar?.name || "Vivek Pandey"}</span>
         </Link>
 
@@ -46,7 +46,7 @@ const Header = () => {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="btn-cine p-2 rounded-lg glass text-sky-300"
+            className="btn-cine p-2 rounded-lg glass text-amber-300"
             title={`Current theme: ${theme}`}
           >
             {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
@@ -103,7 +103,7 @@ const Header = () => {
               download="Vivek_Pandey_Senior_Data_Engineer.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-cine w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-sky-500 text-slate-950 font-bold text-xs"
+              className="btn-cine w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs"
             >
               <Download size={14} />
               <span>Resume (PDF)</span>
@@ -120,7 +120,7 @@ const Header = () => {
           duration={600}
           className="btn-cine text-white font-bold text-sm tracking-[0.2em] uppercase cursor-pointer flex items-center gap-2 shrink-0"
         >
-          <span className="w-2 h-2 rounded-full bg-sky-400" />
+          <span className="w-2 h-2 rounded-full bg-amber-400" />
           <span>{config.sidebar?.name || "Vivek Pandey"}</span>
         </Link>
 
@@ -157,7 +157,7 @@ const Header = () => {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="btn-cine p-2 rounded-lg glass text-sky-300"
+            className="btn-cine p-2 rounded-lg glass text-amber-300"
             title={`Toggle theme (current: ${theme})`}
           >
             {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
@@ -178,7 +178,7 @@ const Header = () => {
             download="Vivek_Pandey_Senior_Data_Engineer.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-cine inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-bold shadow-md shadow-sky-500/20"
+            className="btn-cine inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-md shadow-amber-500/20"
           >
             <Download size={13} />
             <span>Resume</span>

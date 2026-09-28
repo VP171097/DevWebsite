@@ -12,9 +12,9 @@ const SkillItemCard = ({ skill }) => {
 
   // Gradient by category
   const getProgressColor = (proficiency) => {
-    if (proficiency >= 90) return "from-sky-400 to-cyan-300";
-    if (proficiency >= 80) return "from-sky-500 to-sky-400";
-    return "from-sky-600 to-sky-500";
+    if (proficiency >= 90) return "from-amber-400 to-amber-300";
+    if (proficiency >= 80) return "from-amber-500 to-amber-400";
+    return "from-amber-600 to-amber-500";
   };
 
   return (
@@ -38,11 +38,11 @@ const SkillItemCard = ({ skill }) => {
                 }}
               />
             ) : (
-              <Cpu size={20} className="text-sky-400" />
+              <Cpu size={20} className="text-amber-400" />
             )}
           </div>
           <div className="min-w-0">
-            <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-sky-300 transition leading-tight truncate">
+            <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition leading-tight truncate">
               {skill.name}
             </h4>
             <span className="hidden sm:block text-[11px] text-neutral-500 font-medium">
@@ -55,9 +55,9 @@ const SkillItemCard = ({ skill }) => {
         <span
           className={`hidden sm:inline-block text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider border ${
             skill.level === "Expert"
-              ? "bg-sky-500/20 text-sky-200 border-sky-400/50"
+              ? "bg-amber-500/20 text-amber-200 border-amber-400/50"
               : skill.level === "Advanced"
-              ? "bg-sky-500/10 text-sky-300 border-sky-500/30"
+              ? "bg-amber-500/10 text-amber-300 border-amber-500/30"
               : "bg-white/5 text-neutral-300 border-white/15"
           }`}
         >
@@ -71,7 +71,7 @@ const SkillItemCard = ({ skill }) => {
           <span className="text-neutral-400 text-[11px]">
             {skill.experience || "Enterprise Delivery"}
           </span>
-          <span className="text-sky-400 font-bold text-xs">
+          <span className="text-amber-400 font-bold text-xs">
             {skill.proficiency || 88}%
           </span>
         </div>
@@ -88,9 +88,9 @@ const SkillItemCard = ({ skill }) => {
 
       {/* Floating Detailed Hover Tooltip */}
       {showTooltip && skill.useCase && (
-        <div className="absolute left-1/2 -bottom-2 translate-y-full -translate-x-1/2 w-56 max-w-[80vw] p-3 bg-neutral-950/98 backdrop-blur-xl border border-sky-400/50 rounded-xl shadow-2xl z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-150">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-sky-300 mb-1 border-b border-neutral-800 pb-1">
-            <Zap size={13} className="text-sky-400" />
+        <div className="absolute left-1/2 -bottom-2 translate-y-full -translate-x-1/2 w-56 max-w-[80vw] p-3 bg-neutral-950/98 backdrop-blur-xl border border-amber-400/50 rounded-xl shadow-2xl z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-150">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-amber-300 mb-1 border-b border-neutral-800 pb-1">
+            <Zap size={13} className="text-amber-400" />
             <span>{skill.name} • {skill.experience || "Production"}</span>
           </div>
           <p className="text-[11px] text-neutral-300 leading-snug">
@@ -142,15 +142,15 @@ const SkillsSection = () => {
     <div className="text-white">
       <MagicCard
         gradientSize={400}
-        gradientFrom="#0ea5e9"
-        gradientTo="#22d3ee"
+        gradientFrom="#d97706"
+        gradientTo="#fbbf24"
         className="rounded-2xl glass xl:p-8 py-6 px-4"
       >
         {/* Section Header */}
         <Reveal className="px-1">
           <p className="eyebrow">{skillsConfig.sectionTitle || "My Expertise"}</p>
           <div className="flex items-center gap-3 mt-3 mb-2">
-            <div className="bg-sky-400 p-2 rounded-md shadow-md shadow-sky-500/20">
+            <div className="bg-amber-400 p-2 rounded-md shadow-md shadow-amber-500/20">
               <Layers size={20} className="text-slate-950" />
             </div>
             <h2 className="text-2xl font-bold">
@@ -175,8 +175,8 @@ const SkillsSection = () => {
                   onClick={() => setActiveTab(cat)}
                   className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? "bg-sky-500 text-slate-950 shadow-lg shadow-sky-500/20"
-                      : "bg-white/[0.04] text-neutral-300 border border-white/10 hover:border-sky-400/40 hover:text-white"
+                      ? "bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20"
+                      : "bg-white/[0.04] text-neutral-300 border border-white/10 hover:border-amber-400/40 hover:text-white"
                   }`}
                 >
                   {cat}
@@ -196,7 +196,7 @@ const SkillsSection = () => {
               placeholder="Search skill / tech..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs bg-neutral-900/90 border border-neutral-700 focus:border-sky-400 rounded-lg text-white placeholder-neutral-500 focus:outline-none transition"
+              className="w-full pl-9 pr-3 py-1.5 text-xs bg-neutral-900/90 border border-neutral-700 focus:border-amber-400 rounded-lg text-white placeholder-neutral-500 focus:outline-none transition"
             />
           </div>
         </div>
@@ -220,7 +220,7 @@ const SkillsSection = () => {
                 <button
                   type="button"
                   onClick={() => setShowAll((v) => !v)}
-                  className="btn-cine px-4 py-1.5 rounded-lg text-xs font-semibold glass text-neutral-300 hover:text-sky-300 cursor-pointer"
+                  className="btn-cine px-4 py-1.5 rounded-lg text-xs font-semibold glass text-neutral-300 hover:text-amber-300 cursor-pointer"
                 >
                   {showAll ? "Show less" : `Show all ${filteredSkills.length} skills`}
                 </button>

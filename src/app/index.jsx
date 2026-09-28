@@ -10,9 +10,8 @@ import Footer from "@/components/layouts/footer";
 import { useConfig } from "@/context/ConfigContext";
 import Header from "@/components/layouts/header";
 import ScrollToTop from "@/components/ui/ScrollToTop";
-import NotesPage from "./pages/NotesPage";
-import CinematicBackground from "@/components/ui/CinematicBackground";
 import CustomCursor from "@/components/ui/CustomCursor";
+import NotesPage from "./pages/NotesPage";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
 const App = () => {
@@ -64,7 +63,6 @@ const App = () => {
   return (
     <div className="relative">
       {/* Cinematic ambient backdrop (CSS only) */}
-      <CinematicBackground />
 
       {/* Sparse data particles — skipped for reduced-motion visitors */}
       {!reducedMotion && (
@@ -72,7 +70,7 @@ const App = () => {
           className="fixed inset-0 -z-10"
           quantity={60}
           ease={60}
-          color="#38bdf8"
+          color="#f59e0b"
           refresh
         />
       )}
@@ -82,7 +80,7 @@ const App = () => {
 
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-sky-500 focus:text-slate-950 focus:font-bold"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-amber-500 focus:text-slate-950 focus:font-bold"
       >
         Skip to content
       </a>

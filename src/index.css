@@ -4,29 +4,29 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #050609;
-  --foreground: #f5f7fa;
-  --card: #0c0f15;
-  --card-foreground: #f5f7fa;
-  --popover: #0c0f15;
-  --popover-foreground: #f5f7fa;
-  --primary: #38bdf8;
+  --background: #09090b;
+  --foreground: #f8fafc;
+  --card: #121216;
+  --card-foreground: #f8fafc;
+  --popover: #121216;
+  --popover-foreground: #f8fafc;
+  --primary: #f59e0b;
   --primary-foreground: #000000;
-  /* Single accent (Azure) */
-  --accent-rgb: 56, 189, 248;
-  --accent-strong: #0ea5e9;
+  /* Amber accent, as before the redesign */
+  --accent-rgb: 245, 158, 11;
+  --accent-strong: #d97706;
   --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
   --secondary: #1e293b;
   --secondary-foreground: #f8fafc;
   --muted: #334155;
   --muted-foreground: #94a3b8;
-  --accent: #38bdf8;
+  --accent: #f59e0b;
   --accent-foreground: #000000;
   --destructive: #ef4444;
   --destructive-foreground: #f8fafc;
   --border: #27272a;
   --input: #27272a;
-  --ring: #38bdf8;
+  --ring: #f59e0b;
   --radius: 0.75rem;
 }
 
@@ -125,15 +125,15 @@ html.theme-light header nav a:hover {
 }
 
 html.theme-light .hero-role-text {
-  background: linear-gradient(to right, #0f172a, #0284c7, #0369a1) !important;
+  background: linear-gradient(to right, #0f172a, #2563eb, #1e40af) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
 
 html.theme-light .active {
-  background-color: rgba(56, 189, 248, 0.2) !important;
-  color: #0369a1 !important;
-  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  background-color: rgba(37, 99, 235, 0.12) !important;
+  color: #1d4ed8 !important;
+  border: 1px solid rgba(37, 99, 235, 0.35) !important;
 }
 
 @theme inline {
@@ -282,7 +282,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: #f59e0b;
 }
 
 .no-scrollbar::-webkit-scrollbar {
