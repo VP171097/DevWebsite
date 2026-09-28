@@ -204,9 +204,7 @@ const Achievements = () => {
           </div>
         ) : viewMode === "grid" ? (
           <>
-          /* ============================================================ */
-          /* GRID VIEW */
-          /* ============================================================ */
+          {/* ===================== GRID VIEW ===================== */}
           <RevealGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
             {filteredItems.map((item, idx) => {
               const pdfUrl = getAssetHref(item.pdfFile || item.imageFile);
