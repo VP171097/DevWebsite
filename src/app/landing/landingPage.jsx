@@ -74,10 +74,17 @@ const LandingPage = () => {
         </motion.p>
 
         {/* Headline — staggered word reveal */}
-        <h1 className="mt-3 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] text-white">
+        {/* The per-word spans animate independently, which leaves the accessible
+            name as one run-on token. aria-label carries the real sentence and
+            the spans are hidden from assistive tech. */}
+        <h1
+          className="mt-3 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] text-white"
+          aria-label={headlineWords.join(" ")}
+        >
           {headlineWords.map((word, i) => (
             <motion.span
               key={word}
+              aria-hidden="true"
               className="inline-block mr-[0.28em]"
               initial={reduced ? false : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
