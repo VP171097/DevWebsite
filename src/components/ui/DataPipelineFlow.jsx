@@ -18,7 +18,9 @@ const NODES = [
   { id: "ing", label: "Ingestion", x: 240, y: 60, logo: logo("pyspark.png"), alt: "PySpark" },
   { id: "lake", label: "Data Lake", x: 420, y: 140, logo: logo("dataLake.png"), alt: "Azure Data Lake" },
   { id: "dbx", label: "Databricks", x: 600, y: 70, logo: logo("databricks.png"), alt: "Databricks" },
-  { id: "delta", label: "Delta Lake", x: 780, y: 150, logo: logo("databricks_lakehouse.png"), alt: "Delta Lake" },
+  // databricks_lakehouse.png is the Databricks Lakehouse badge, not Delta Lake,
+  // so this node uses a dedicated Delta Lake mark.
+  { id: "delta", label: "Delta Lake", x: 780, y: 150, logo: logo("delta-lake.svg"), alt: "Delta Lake" },
   { id: "bi", label: "Analytics", x: 950, y: 90, logo: logo("sql.svg"), alt: "SQL analytics" },
 ];
 
@@ -114,7 +116,7 @@ const DataPipelineFlow = ({ className = "" }) => {
     <div className={`pointer-events-none select-none ${className}`} aria-hidden="true">
       <svg
         viewBox="0 0 1020 210"
-        className="w-full h-auto"
+        className="w-full h-full"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
       >
@@ -163,21 +165,38 @@ const DataPipelineFlow = ({ className = "" }) => {
                 }}
               />
 
-              {/* Official product logo, revealed as the packet arrives */}
-              <image
-                href={n.logo}
-                x={n.x - 13}
-                y={n.y - 13}
-                width="26"
-                height="26"
-                preserveAspectRatio="xMidYMid meet"
-                style={{
-                  opacity: active ? 1 : 0,
-                  transform: active ? "scale(1)" : "scale(0.7)",
-                  transformOrigin: `${n.x}px ${n.y}px`,
-                  transition: "opacity 320ms ease, transform 320ms cubic-bezier(0.22,1,0.36,1)",
-                }}
-              />
+              {/* Product logo, or a delta mark where no official asset exists,
+                  revealed as the packet arrives */}
+              {n.glyph === "delta" ? (
+                <path
+                  d={`M ${n.x} ${n.y - 12} L ${n.x + 12} ${n.y + 9} L ${n.x - 12} ${n.y + 9} Z`}
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                  style={{
+                    opacity: active ? 1 : 0,
+                    transform: active ? "scale(1)" : "scale(0.7)",
+                    transformOrigin: `${n.x}px ${n.y}px`,
+                    transition: "opacity 320ms ease, transform 320ms cubic-bezier(0.22,1,0.36,1)",
+                  }}
+                />
+              ) : (
+                <image
+                  href={n.logo}
+                  x={n.x - 13}
+                  y={n.y - 13}
+                  width="26"
+                  height="26"
+                  preserveAspectRatio="xMidYMid meet"
+                  style={{
+                    opacity: active ? 1 : 0,
+                    transform: active ? "scale(1)" : "scale(0.7)",
+                    transformOrigin: `${n.x}px ${n.y}px`,
+                    transition: "opacity 320ms ease, transform 320ms cubic-bezier(0.22,1,0.36,1)",
+                  }}
+                />
+              )}
 
               {/* Dot shown while the stage is idle, hidden behind the logo */}
               <circle

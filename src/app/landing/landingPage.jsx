@@ -41,7 +41,7 @@ const LandingPage = () => {
   const notesUrl = `${import.meta.env.BASE_URL}?page=notes`;
 
   return (
-    <div className="relative min-h-[92vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden pt-8 pb-16">
+    <div className="relative min-h-[92vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden pt-8 pb-20">
       {/* Background Particles */}
       <Particles
         className="fixed inset-0 w-full h-full -z-10"
@@ -177,8 +177,9 @@ const LandingPage = () => {
 
       {/* Animated data pipeline: Sources -> Ingestion -> Data Lake ->
           Databricks -> Delta Lake -> Analytics */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 opacity-90">
-        <DataPipelineFlow />
+      {/* Data pipeline band — in normal flow, below the hero content */}
+      <div className="z-10 w-full max-w-5xl mx-auto mt-8 sm:mt-10 h-[78px] sm:h-[104px] lg:h-[124px] opacity-80">
+        <DataPipelineFlow className="h-full w-full" />
       </div>
     </div>
   );
