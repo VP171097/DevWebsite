@@ -118,7 +118,7 @@
         {
           "id": "project-ecommerce-lakehouse",
           "topic": "Project 1: E-commerce Lakehouse Build Manual",
-          "description": "End-to-end build guide for an incremental, governed Databricks lakehouse over Olist e-commerce data: repo layout, batch preparation, Bronze/Silver/Gold pipelines, data-quality expectations and quarantine tables, SCD2 dimensions, governance and a sales dashboard. Includes the shared set-up standards and the full command reference.",
+          "description": "End-to-end build guide for an incremental, governed Databricks lakehouse over Olist e-commerce data: repo layout, batch preparation, Bronze/Silver/Gold pipelines, data-quality expectations and quarantine tables, SCD2 dimensions, governance and a sales dashboard. The shared set-up standards and full command reference follow as appendices.",
           "tags": [
             "Databricks",
             "Medallion",
@@ -133,7 +133,7 @@
         {
           "id": "project-performance-cost",
           "topic": "Project 2: Performance & Cost Case Study",
-          "description": "A benchmarking case study on NYC TLC data: measuring and tuning Spark workloads, comparing layouts and cluster configurations, and documenting the performance and cost trade-offs. Includes the shared set-up standards and the full command reference.",
+          "description": "A benchmarking case study on NYC TLC data: measuring and tuning Spark workloads, comparing layouts and cluster configurations, and documenting the performance and cost trade-offs. The shared set-up standards and full command reference follow as appendices.",
           "tags": [
             "Performance",
             "Cost",
@@ -148,7 +148,7 @@
         {
           "id": "project-postgres-cdc-cicd",
           "topic": "Project 3: Postgres CDC Pipeline with CI/CD",
-          "description": "Change-data-capture pipeline from Postgres into a Databricks lakehouse, with the engineering practices around it: testable transformations, unit tests, linting and a CI/CD workflow. Includes the shared set-up standards and the full command reference.",
+          "description": "Change-data-capture pipeline from Postgres into a Databricks lakehouse, with the engineering practices around it: testable transformations, unit tests, linting and a CI/CD workflow. The shared set-up standards and full command reference follow as appendices.",
           "tags": [
             "CDC",
             "Postgres",
@@ -163,7 +163,7 @@
         {
           "id": "project-azure-end-to-end",
           "topic": "Project 4: Azure End-to-End Data Platform",
-          "description": "Building the platform on Azure: resource group, ADLS Gen2, Key Vault-backed secret scopes, managed-identity access connectors, Azure SQL and Cosmos DB, plus diagnostic logging. Includes the shared set-up standards and the full command reference.",
+          "description": "Building the platform on Azure: resource group, ADLS Gen2, Key Vault-backed secret scopes, managed-identity access connectors, Azure SQL and Cosmos DB, plus diagnostic logging. The shared set-up standards and full command reference follow as appendices.",
           "tags": [
             "Azure",
             "ADLS Gen2",
