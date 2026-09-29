@@ -80,6 +80,16 @@ export const RevealGroup = ({
   );
 };
 
+/**
+ * Item inside a RevealGroup.
+ *
+ * It drives its own whileInView rather than relying purely on the parent's
+ * variant propagation. A RevealGroup with `once: true` stops animating after
+ * its first pass, so children mounted later — the cards a "Show all" toggle
+ * adds — would otherwise stay at the hidden variant forever: invisible, but
+ * still occupying layout. Self-triggering makes a late-mounted item animate
+ * itself as soon as it is in view.
+ */
 export const RevealItem = ({ children, className = "", y = 24, ...rest }) => {
   const reduced = usePrefersReducedMotion();
 
@@ -94,6 +104,9 @@ export const RevealItem = ({ children, className = "", y = 24, ...rest }) => {
   return (
     <motion.div
       className={className}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.1, margin: "0px 0px -40px 0px" }}
       variants={{
         hidden: { opacity: 0, y },
         show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
