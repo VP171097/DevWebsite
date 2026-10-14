@@ -136,6 +136,42 @@ html.theme-light .active {
   border: 1px solid rgba(37, 99, 235, 0.35) !important;
 }
 
+/* The amber accent is tuned for the dark surfaces. On the light theme's white
+   cards #fbbf24 sits near 1.6:1 against white, so amber text shifts to a
+   darker amber that clears the 4.5:1 minimum. */
+html.theme-light .text-amber-200,
+html.theme-light .text-amber-300,
+html.theme-light .text-amber-400,
+html.theme-light .text-amber-500 {
+  color: #b45309 !important;
+}
+
+/* Keep amber readable where it sits on an amber-tinted chip rather than white. */
+html.theme-light .bg-amber-400\/10 .text-amber-300,
+html.theme-light .bg-amber-400\/10 .text-amber-400,
+html.theme-light .bg-amber-500\/10 .text-amber-300 {
+  color: #92400e !important;
+}
+
+/* The resume CTA is a shimmer button: its fill is painted from the --bg custom
+   property on both the button and an inner layer, so overriding `background`
+   alone leaves the inner layer black. Setting --bg recolours both. Its label
+   carries .text-white, which the blanket light-theme .text-white override
+   would otherwise turn near-black on a dark fill — invisible. */
+html.theme-light .resume-cta {
+  --bg: #1d4ed8 !important;
+  border-color: rgba(37, 99, 235, 0.55) !important;
+}
+
+html.theme-light .resume-cta,
+html.theme-light .resume-cta * {
+  color: #ffffff !important;
+}
+
+html.theme-light .eyebrow {
+  color: #b45309 !important;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -262,8 +298,8 @@ body {
 .glass-panel-glow {
   background: rgba(15, 15, 20, 0.85);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.15);
 }
 
 /* Custom Scrollbar */
@@ -294,9 +330,9 @@ body {
 }
 
 .active {
-  background-color: rgba(56, 189, 248, 0.15) !important;
+  background-color: rgba(245, 158, 11, 0.15) !important;
   color: #7dd3fc !important;
-  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
   font-weight: 600 !important;
 }
 
@@ -325,9 +361,9 @@ h1, h2, h3, h4 {
   z-index: -20;
   pointer-events: none;
   background:
-    radial-gradient(900px 520px at 15% -5%, rgba(56, 189, 248, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 15% -5%, rgba(245, 158, 11, 0.10), transparent 60%),
     radial-gradient(760px 480px at 88% 8%, rgba(99, 102, 241, 0.08), transparent 62%),
-    radial-gradient(1100px 700px at 50% 108%, rgba(56, 189, 248, 0.07), transparent 65%),
+    radial-gradient(1100px 700px at 50% 108%, rgba(245, 158, 11, 0.07), transparent 65%),
     var(--background);
 }
 
@@ -347,8 +383,8 @@ h1, h2, h3, h4 {
 
 html.theme-light .cinematic-bg {
   background:
-    radial-gradient(900px 520px at 15% -5%, rgba(56, 189, 248, 0.14), transparent 60%),
-    radial-gradient(1100px 700px at 50% 108%, rgba(56, 189, 248, 0.10), transparent 65%),
+    radial-gradient(900px 520px at 15% -5%, rgba(245, 158, 11, 0.14), transparent 60%),
+    radial-gradient(1100px 700px at 50% 108%, rgba(245, 158, 11, 0.10), transparent 65%),
     #f8fafc;
 }
 
@@ -400,7 +436,7 @@ html.theme-light .glass-strong {
   right: 10%;
   bottom: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(56, 189, 248, 0.25), transparent);
+  background: linear-gradient(to right, transparent, rgba(245, 158, 11, 0.25), transparent);
 }
 
 /* --- Eyebrow / label typography --- */
@@ -409,7 +445,7 @@ html.theme-light .glass-strong {
   letter-spacing: 0.28em;
   text-transform: uppercase;
   font-weight: 600;
-  color: rgba(56, 189, 248, 0.92);
+  color: rgba(245, 158, 11, 0.92);
 }
 
 /* --- Button micro-interactions --- */
@@ -448,8 +484,8 @@ html.theme-light .glass-strong {
 
 .card-cine:hover {
   transform: translateY(-4px) scale(1.012);
-  border-color: rgba(56, 189, 248, 0.45);
-  box-shadow: 0 18px 40px -22px rgba(56, 189, 248, 0.5);
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 18px 40px -22px rgba(245, 158, 11, 0.5);
 }
 
 .card-cine .card-icon {
@@ -462,7 +498,7 @@ html.theme-light .glass-strong {
 
 /* --- Focus visibility (a11y) --- */
 :focus-visible {
-  outline: 2px solid rgba(56, 189, 248, 0.9);
+  outline: 2px solid rgba(245, 158, 11, 0.9);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -499,7 +535,7 @@ html.theme-light .glass-strong {
 .cursor-ring.is-active {
   width: 46px;
   height: 46px;
-  border-color: rgba(56, 189, 248, 0.9);
+  border-color: rgba(245, 158, 11, 0.9);
 }
 
 /* --- Data-flow animation used by pipeline / architecture SVGs --- */
