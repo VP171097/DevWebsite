@@ -136,21 +136,94 @@ html.theme-light .active {
   border: 1px solid rgba(37, 99, 235, 0.35) !important;
 }
 
-/* The amber accent is tuned for the dark surfaces. On the light theme's white
-   cards #fbbf24 sits near 1.6:1 against white, so amber text shifts to a
-   darker amber that clears the 4.5:1 minimum. */
+/* Light theme runs a blue accent instead of the dark theme's amber: #fbbf24
+   sits near 1.6:1 on white, while blue-700 clears AA comfortably. Every amber
+   utility in use is remapped here — text, fills, borders, gradients and
+   shadows — so the two themes stay internally consistent. */
 html.theme-light .text-amber-200,
 html.theme-light .text-amber-300,
 html.theme-light .text-amber-400,
 html.theme-light .text-amber-500 {
-  color: #b45309 !important;
+  color: #1d4ed8 !important;
 }
 
-/* Keep amber readable where it sits on an amber-tinted chip rather than white. */
+/* Solid accent chips: blue fill needs a light label, not the dark one the
+   amber fill called for. */
+html.theme-light .bg-amber-300,
+html.theme-light .bg-amber-400,
+html.theme-light .bg-amber-500 {
+  background-color: #2563eb !important;
+}
+
+html.theme-light .bg-amber-300.text-slate-950,
+html.theme-light .bg-amber-400.text-slate-950,
+html.theme-light .bg-amber-500.text-slate-950,
+html.theme-light .bg-amber-400 .text-slate-950,
+html.theme-light .bg-amber-500 .text-slate-950,
+html.theme-light .bg-amber-300 *,
+html.theme-light .bg-amber-400 *,
+html.theme-light .bg-amber-500 * {
+  color: #ffffff !important;
+}
+
+/* Tinted fills keep their softness, in blue. */
+html.theme-light .bg-amber-400\/10,
+html.theme-light .bg-amber-500\/10 {
+  background-color: rgba(37, 99, 235, 0.10) !important;
+}
+
+html.theme-light .bg-amber-500\/15,
+html.theme-light .bg-amber-400\/15,
+html.theme-light .bg-amber-500\/20,
+html.theme-light .bg-amber-400\/20 {
+  background-color: rgba(37, 99, 235, 0.14) !important;
+}
+
+/* Text sitting on a blue-tinted chip stays dark enough to read. */
 html.theme-light .bg-amber-400\/10 .text-amber-300,
 html.theme-light .bg-amber-400\/10 .text-amber-400,
-html.theme-light .bg-amber-500\/10 .text-amber-300 {
-  color: #92400e !important;
+html.theme-light .bg-amber-500\/10 .text-amber-300,
+html.theme-light .bg-amber-500\/15 .text-amber-300 {
+  color: #1e40af !important;
+}
+
+html.theme-light .border-amber-400,
+html.theme-light .border-amber-500 {
+  border-color: #2563eb !important;
+}
+
+html.theme-light .border-amber-400\/20,
+html.theme-light .border-amber-400\/30,
+html.theme-light .border-amber-400\/40,
+html.theme-light .border-amber-400\/50,
+html.theme-light .border-amber-500\/30,
+html.theme-light .border-amber-500\/40 {
+  border-color: rgba(37, 99, 235, 0.40) !important;
+}
+
+/* Gradient stops — progress bars, underlines and the timeline track. */
+html.theme-light .from-amber-400,
+html.theme-light .from-amber-500 {
+  --tw-gradient-from: #2563eb !important;
+}
+
+html.theme-light .via-amber-400,
+html.theme-light .via-amber-500,
+html.theme-light .via-amber-600 {
+  --tw-gradient-via: #1d4ed8 !important;
+}
+
+html.theme-light .to-amber-300,
+html.theme-light .to-amber-400,
+html.theme-light .to-amber-500 {
+  --tw-gradient-to: #60a5fa !important;
+}
+
+html.theme-light .shadow-amber-400\/20,
+html.theme-light .shadow-amber-500\/10,
+html.theme-light .shadow-amber-500\/20,
+html.theme-light .shadow-amber-500\/25 {
+  --tw-shadow-color: rgba(37, 99, 235, 0.22) !important;
 }
 
 /* The resume CTA is a shimmer button: its fill is painted from the --bg custom
@@ -169,7 +242,7 @@ html.theme-light .resume-cta * {
 }
 
 html.theme-light .eyebrow {
-  color: #b45309 !important;
+  color: #1d4ed8 !important;
 }
 
 @theme inline {
