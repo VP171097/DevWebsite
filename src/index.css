@@ -147,24 +147,19 @@ html.theme-light .text-amber-500 {
   color: #1d4ed8 !important;
 }
 
-/* Solid accent chips: blue fill needs a light label, not the dark one the
-   amber fill called for. */
-html.theme-light .bg-amber-300,
-html.theme-light .bg-amber-400,
-html.theme-light .bg-amber-500 {
-  background-color: #2563eb !important;
+/* …except where it sits on a solid amber fill, which is not a white surface. */
+html.theme-light .bg-amber-300 .text-amber-200,
+html.theme-light .bg-amber-300 .text-amber-300,
+html.theme-light .bg-amber-400 .text-amber-200,
+html.theme-light .bg-amber-400 .text-amber-300,
+html.theme-light .bg-amber-400 .text-amber-400,
+html.theme-light .bg-amber-500 .text-amber-300,
+html.theme-light .bg-amber-500 .text-amber-400 {
+  color: #0f172a !important;
 }
 
-html.theme-light .bg-amber-300.text-slate-950,
-html.theme-light .bg-amber-400.text-slate-950,
-html.theme-light .bg-amber-500.text-slate-950,
-html.theme-light .bg-amber-400 .text-slate-950,
-html.theme-light .bg-amber-500 .text-slate-950,
-html.theme-light .bg-amber-300 *,
-html.theme-light .bg-amber-400 *,
-html.theme-light .bg-amber-500 * {
-  color: #ffffff !important;
-}
+/* Solid accent fills are not white surfaces, so they stay amber with the dark
+   label they were designed for. Only accents that sit against white go blue. */
 
 /* Tinted fills keep their softness, in blue. */
 html.theme-light .bg-amber-400\/10,
@@ -232,8 +227,7 @@ html.theme-light .shadow-amber-500\/25 {
    carries .text-white, which the blanket light-theme .text-white override
    would otherwise turn near-black on a dark fill — invisible. */
 html.theme-light .resume-cta {
-  --bg: #1d4ed8 !important;
-  border-color: rgba(37, 99, 235, 0.55) !important;
+  border-color: rgba(245, 158, 11, 0.55) !important;
 }
 
 html.theme-light .resume-cta,
