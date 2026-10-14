@@ -84,6 +84,47 @@
     },
     {
       "id": 3,
+      "title": "SpendCop — Personal Budget Dashboard",
+      "category": "Full Stack / Tools",
+      "featured": true,
+      "summary": "Local-first budgeting dashboard that answers \"how much can I safely spend?\" first, then handles bills, savings goals and debts in plain language — with optional cloud sync and an on-device assistant.",
+      "description": "A budget dashboard built for people with no finance or tech background. It runs entirely on the device by default: there is no bank login, and data lives in the browser's IndexedDB (falling back to localStorage). Accounts and sync are opt-in, and so is the AI assistant. The app ships two builds — a lazy-loaded split build where charts, 3D scenes, Excel export and the landing page download only when needed, and a single self-contained HTML file for offline sharing.",
+      "architecture": "React 18 + TypeScript on Vite ➔ Zustand + immer state ➔ IndexedDB with localStorage fallback (local-first) ➔ optional Supabase account, row-level security and conflict-aware sync ➔ optional Gemini-backed edge function for free-form questions",
+      "metrics": [
+        "Works fully offline with no account",
+        "Two build targets: split lazy-loaded and single-file",
+        "Row-level security, one private row per user",
+        "Common questions answered on-device, no network"
+      ],
+      "highlights": [
+        "Local-first by default: no bank login, data stays in the browser's IndexedDB with a localStorage fallback",
+        "Opt-in Supabase sync with row-level security and a save that refuses to clobber another device's newer copy",
+        "Ask Tally answers common money questions on-device; logged-in users can opt into a Gemini-backed edge function that keeps the API key server-side",
+        "Lazy-loaded split build keeps three.js, Recharts and the landing page out of the initial download",
+        "Interactive landing page with a what-if calculator, paycheck planner, shared-money tabs and an FAQ",
+        "Deployed to GitHub Pages from a workflow on every push to main"
+      ],
+      "techStack": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Zustand",
+        "Recharts",
+        "three.js",
+        "IndexedDB",
+        "Supabase",
+        "PostgreSQL RLS",
+        "Google Gemini"
+      ],
+      "image": "assets/projects/spendcop.svg",
+      "githubRepo": "VP171097/ExpenseDashboard",
+      "githubUrl": "https://github.com/VP171097/ExpenseDashboard",
+      "liveUrl": "https://vp171097.github.io/ExpenseDashboard/"
+    },
+    {
+      "id": 4,
       "title": "GitHub Developer Suite & Privacy Manager",
       "category": "Full Stack / Tools",
       "featured": true,
@@ -114,7 +155,7 @@
       "liveUrl": ""
     },
     {
-      "id": 4,
+      "id": 5,
       "title": "RentSlate: Tenant & Rent Management Platform",
       "category": "Full Stack / Tools",
       "featured": true,
@@ -148,7 +189,7 @@
       "liveUrl": "https://vp171097.github.io/TenantRentManager/"
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "Modern Interactive Portfolio Platform",
       "category": "Full Stack / Tools",
       "featured": false,
