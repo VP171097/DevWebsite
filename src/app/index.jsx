@@ -12,6 +12,7 @@ import Header from "@/components/layouts/header";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import CustomCursor from "@/components/ui/CustomCursor";
 import NotesPage from "./pages/NotesPage";
+import ChatWidget from "@/components/ui/ChatWidget";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
 const App = () => {
@@ -111,6 +112,7 @@ const App = () => {
 
       {/* Floating Back to Top Button */}
       <ScrollToTop />
+      <ChatWidget />
     </div>
   );
 };
