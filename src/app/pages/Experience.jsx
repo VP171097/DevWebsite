@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { Briefcase, Download, CheckCircle2 } from "lucide-react";
 import { useConfig } from "@/context/ConfigContext";
+import { resumeFileName, RESUME_FALLBACK } from "@/lib/resume";
 import { Reveal } from "@/components/ui/Reveal";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
@@ -72,7 +73,8 @@ const Experience = () => {
     return <div className="text-white text-center py-6">Loading Experience…</div>;
   }
 
-  const resumeLink = config.landing?.resumeLink || "/resume.pdf";
+  const resumeLink = config.landing?.resumeLink || RESUME_FALLBACK;
+  const resumeName = resumeFileName(config.landing?.resumeLink);
 
   return (
     <section
@@ -97,7 +99,7 @@ const Experience = () => {
 
           <a
             href={resumeLink}
-            download="Vivek_Pandey_Senior_Data_Engineer.pdf"
+            download={resumeName}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-cine hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg glass text-amber-300 text-xs font-semibold"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { useConfig } from "@/context/ConfigContext";
+import { resumeFileName, RESUME_FALLBACK } from "@/lib/resume";
 import { useTheme } from "@/context/ThemeContext";
 import { Menu, X, Sun, Moon, Download, Github } from "lucide-react";
 
@@ -20,7 +21,8 @@ const Header = () => {
   if (loading || !config.navigation) return null;
 
   const navItems = config.navigation.navItems;
-  const resumeLink = config.landing?.resumeLink || "/resume.pdf";
+  const resumeLink = config.landing?.resumeLink || RESUME_FALLBACK;
+  const resumeName = resumeFileName(config.landing?.resumeLink);
 
   const shell = scrolled
     ? "glass-strong border-b border-white/10 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.9)]"
@@ -100,7 +102,7 @@ const Header = () => {
           <div className="pt-3 mt-2 border-t border-white/10">
             <a
               href={resumeLink}
-              download="Vivek_Pandey_Senior_Data_Engineer.pdf"
+              download={resumeName}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-cine w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs"
@@ -175,7 +177,7 @@ const Header = () => {
 
           <a
             href={resumeLink}
-            download="Vivek_Pandey_Senior_Data_Engineer.pdf"
+            download={resumeName}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-cine inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-md shadow-amber-500/20"

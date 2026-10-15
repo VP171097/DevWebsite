@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { MessageSquare, X, Send, CornerDownLeft } from "lucide-react";
 import { useConfig } from "@/context/ConfigContext";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
+import { resumeFileName } from "@/lib/resume";
 
 /**
  * Profile assistant.
@@ -342,7 +343,7 @@ const ChatWidget = () => {
                                 target={l.download ? undefined : "_blank"}
                                 rel="noopener noreferrer"
                                 download={
-                                  l.download ? "Vivek_Pandey_Senior_Data_Engineer.pdf" : undefined
+                                  l.download ? resumeFileName(config?.landing?.resumeLink) : undefined
                                 }
                                 className="px-2 py-0.5 rounded-md text-[11px] font-semibold text-amber-300 border border-amber-400/30 hover:bg-amber-400/10 transition"
                               >

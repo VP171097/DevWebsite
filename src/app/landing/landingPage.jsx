@@ -9,6 +9,7 @@ import { Scrollui } from "@/components/ui/scrollui";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import SocialLinks from "@/components/layouts/socialLink";
 import { useConfig } from "@/context/ConfigContext";
+import { resumeFileName } from "@/lib/resume";
 import { Download, Sparkles, BookOpen, Terminal, Database } from "lucide-react";
 
 const LandingPage = () => {
@@ -127,7 +128,7 @@ const LandingPage = () => {
             // Force the saved filename regardless of the served path.
             const a = document.createElement("a");
             a.href = landingConfig.resumeLink;
-            a.download = "Vivek_Pandey_Senior_Data_Engineer.pdf";
+            a.download = resumeFileName(landingConfig.resumeLink);
             document.body.appendChild(a);
             a.click();
             a.remove();
